@@ -48,7 +48,7 @@
 
 				<section>
 					<h2>Install Stack</h2>
-					<p>On Linux, MacOs, run from a terminal:</p>
+					<p>On Linux, MacOs, run from a terminal</p>
 					<pre><code class="nohighlight" data-trim data-noescape>
 <strong>curl -sSL https://get.haskellstack.org/ | sh</strong>
 					</code></pre>
@@ -57,16 +57,16 @@
 <strong>wget -qO- https://get.haskellstack.org/ | sh</strong>
 					</code></pre>
 					<p>On Windows, download and run <a href="https://get.haskellstack.org/stable/windows-x86_64-installer.exe" target="_blank">installer</a></p>
-					<p>Full instructions: <a href="https://docs.haskellstack.org" target="_blank">https://docs.haskellstack.org</a></p>
+					<p>Full instructions on <a href="https://docs.haskellstack.org" target="_blank">https://docs.haskellstack.org</a></p>
 				</section>
 
 				<section>
 					<h2>Hello World!</h2>
-					<p>Type the code in a file <strong><code>helloworld.hs</code></strong>:</p>
+					<p>Type the code in a file <strong><code>helloworld.hs</code></strong></p>
 					<pre><code class="haskell" data-trim data-noescape>
 main = putStrLn "Hello, Haskell world!"
 					</code></pre>
-					<p>Compile and execute it with:</p>
+					<p>Compile and execute it with</p>
 					<pre><code class="nohighlight" data-trim data-noescape>
 > <strong>stack ghc helloworld.hs</strong>
 [1 of 1] Compiling Main         ( helloworld.hs, helloworld.o )
@@ -79,7 +79,7 @@ Hello, Haskell world!
 
 				<section>
 					<h2>Interactive Haskell</h2>
-					<p>Start an interactive session (REPL):</p>
+					<p>Start an interactive session (REPL)</p>
 					<pre><code class="nohighlight" data-trim data-noescape>
 > <strong>stack ghci</strong>
 Configuring GHCi with the following packages:
@@ -87,7 +87,7 @@ GHCi, version 8.2.2: http://www.haskell.org/ghc/  :? for help
 Loaded GHCi configuration from ...
 Prelude>
 					</code></pre>
-					<p>Load your Haskell program and call its <strong><code>main</code></strong> function:</p>
+					<p>Load your Haskell program and call its <strong><code>main</code></strong> function</p>
 					<pre><code class="nohighlight" data-trim data-noescape>
 Prelude> <strong>:load helloworld.hs</strong>
 [1 of 1] Compiling Main         ( helloworld.hs, interpreted )
@@ -100,10 +100,12 @@ Hello, Haskell world!
 
 				<section>
 					<h2>Using the REPL</h2>
-					<p>Create functions and evaluate Haskell expressions:</p>
+					<p>Create functions and evaluate Haskell expressions</p>
 					<pre><code class="nohighlight" data-trim data-noescape>
 Prelude> <strong>2 + 3 * (4 ^ 5)</strong>
 3074
+Prelude> <strong>1 < 2</strong>
+True
 Prelude> <strong>fac 0 = 1; fac n = n * fac (n - 1)</strong>
 Prelude> <strong>fac 50</strong>
 30414093201713378043612608166064768844377641568960512000000000000
@@ -133,13 +135,14 @@ Prelude> <strong>sumList [1..10000]</strong>
 <strong>:reload</strong> or <strong>:r</strong>             - reload Haskell module
 <strong>:cd &lt;dir&gt;</strong>                 - change directory
 <strong>:! &lt;cmd&gt;</strong>                  - execute shell command
+<strong>:help</strong> or <strong>:?</strong>               - list available commands
 <strong>:quit</strong> or <strong>:q</strong>               - quit GHCi
 					</code></pre>
 				</section>
 
 				<section>
 					<h1>Congratulations</h1>
-					<h2>You're ready to start!</h2>
+					<h2>You're ready to <a href="index.html">start!</a></h2>
 				</section>
 
 			</div>
