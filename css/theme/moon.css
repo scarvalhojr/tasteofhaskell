@@ -54,7 +54,6 @@ body {
   font-weight: normal;
   line-height: 1.2;
   letter-spacing: normal;
-  text-transform: uppercase;
   text-shadow: none;
   word-wrap: break-word; }
 
@@ -87,7 +86,9 @@ body {
   max-width: 95%;
   max-height: 95%; }
 
-.reveal strong,
+.reveal strong {
+  color: #ffffcc; }
+
 .reveal b {
   font-weight: bold; }
 
@@ -164,7 +165,8 @@ body {
   padding: 5px;
   overflow: auto;
   max-height: 400px;
-  word-wrap: normal; }
+  word-wrap: normal;
+  background: #404040; }
 
 .reveal table {
   margin: auto;
