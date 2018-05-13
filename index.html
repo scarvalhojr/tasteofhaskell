@@ -64,6 +64,21 @@
 				</section>
 
 				<section>
+					<h2>Imperative vs. Functional Style</h2>
+					<p>Imperative
+					<pre><code class="java" data-trim data-noescape>
+    int total = 0;
+    for (int n = 1; n <= 100; n++)
+      if (n % 2 == 0)
+        total += n;
+					</code></pre>
+					<p>Functional</p>
+					<pre><code class="haskell" data-trim data-noescape>
+total = sum (filter even [1..100])
+					</code></pre>
+				</section>
+
+				<section>
 					<h2>Functions</h2>
 					<p>Defined with an equation, take one or more parameters</p>
 					<pre><code class="haskell" data-trim data-noescape>
@@ -82,32 +97,150 @@ Prelude> <strong>double (double 5)</strong>
 				</section>
 
 				<section>
-					<h2>Imperative vs. Functional Style</h2>
-					<p>Imperative
-					<pre><code class="java" data-trim data-noescape>
-    int total = 0;
-    for (int n = 1; n <= 100; n++)
-      if (n % 2 == 0)
-        total += n;
+					<h2>Function Application</h2>
+					<p>Parameters and arguments are separated by spaces</p>
+					<pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>add x y = x + y</strong>
+Prelude> <strong>add 2 5</strong>
+7
 					</code></pre>
-					<p>Haskell</p>
-					<pre><code class="haskell" data-trim data-noescape>
-total = sum (filter even [1..100])
-					</code></pre>
+					<p>Function application has higher priority than other operators so
+						 <strong><code>f a + b</code></strong> means <strong><code>(f a) + b</code></strong>
+					</p>
+					<p>Use parantheses to change order of evaluation, e.g.<br>
+						 <strong><code>f (a + b)</code></strong>
+					</p>
 				</section>
 
 				<section>
 					<h2>Function and Parameter Names</h2>
 					<ul>
-						<li>Must begin with <strong>lower-case letter</strong></li>
+						<li>Must <strong>begin with lower-case letter</strong></li>
 						<li>Followed by zero or more:</li>
 						<ul>
 							<li>Lower- and upper-case letters</li>
 							<li>Digits, underscores, and foward single-quotes (<strong><code>'</code></strong>)</li>
 						</ul>
 						<li>Examples: <strong><code>myFunc</code></strong>, <strong><code>arg_1</code></strong>,
-							  <strong><code>x'</code></strong>, <strong><code>y''</code></strong></li>
+							<strong><code>x'</code></strong>, <strong><code>x''</code></strong></li>
 					</ul>
+				</section>
+
+				<section>
+					<h2>Basic Types</h2>
+					<table>
+						<tbody>
+							<tr>
+								<td><strong><code>Bool</code></strong></td>
+								<td>Logical values</td>
+								<td><strong><code>True</code></strong> and <strong><code>False</code></strong></td>
+							</tr>
+							<tr>
+								<td><strong><code>Char</code></strong></td>
+								<td>Single characters</td>
+								<td><strong><code>'a'</code></strong>, <strong><code>'B'</code></strong>, <strong><code>'1'</code></strong></td>
+							</tr>
+							<tr>
+								<td><strong><code>String</code></strong></td>
+								<td>List of <code>Chars</code></td>
+								<td><strong><code>"abc"</code></strong>, <strong><code>""</code></strong>, <strong><code>"a"</code></strong></td>
+							</tr>
+							<tr>
+								<td><strong><code>Int</code></strong></td>
+								<td>Fixed precision</td>
+								<td><strong><code>1</code></strong>, <strong><code>-10</code></strong>, <strong><code>999</code></strong></td>
+							</tr>
+							<tr>
+								<td><strong><code>Integer</code></strong></td>
+								<td>Arbitrary precision</td>
+								<td><strong><code>99999999999999</code></strong></td>
+							</tr>
+							<tr>
+								<td><strong><code>Float</code></strong></td>
+								<td>Single precision</td>
+								<td><strong><code>1.0</code></strong>, <strong><code>-0.99</code></strong></td>
+							</tr>
+							<tr>
+								<td><strong><code>Double</code></strong></td>
+								<td>Double precision</td>
+								<td><strong><code>999999999999.9</code></strong></td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section>
+					<h2>Types</h2>
+					<p>The notation <strong><code>v :: T</code></strong> indicates
+					   <strong><code>v</code></strong> <em>has type</em>
+					   <strong><code>T</code></strong>
+					</p>
+					<pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:type True</strong>
+True :: Bool
+Prelude> <strong>:t 'a'</strong>
+'a' :: Char
+Prelude> <strong>:t "a"</strong>
+"a" :: [Char]
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Lists</h2>
+					<p>Sequences of <strong>elements of the same type</strong></p>
+					<pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t [True,False,True]</strong>
+[True,False,True] :: [Bool]
+Prelude> <strong>:t ['a','b','c']</strong>
+['a','b','c'] :: [Char]
+Prelude> <strong>:t ["abc","def"]</strong>
+["abc","def"] :: [[Char]]
+					</code></pre>
+					<p>The type of a list conveys no information about its length; in fact,
+						 lists can be infinite!
+					</p>
+				</section>
+
+				<section>
+					<h2>Some Useful List Functions</h2>
+					<div class="two-columns">
+						<pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>head [1,2,3,4,5]</strong>
+1
+Prelude> <strong>tail [1,2,3,4,5]</strong>
+[2,3,4,5]
+Prelude> <strong>[1,2,3,4,5] !! 2</strong>
+3
+Prelude> <strong>take 3 [1,2,3,4,5]</strong>
+[1,2,3]
+Prelude> <strong>drop 3 [1,2,3,4,5]</strong>
+[4,5]
+Prelude> <strong>length [1,2,3,4,5]</strong>
+5
+						</code></pre>
+					</div>
+					<div class="two-columns">
+						<pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>sum [1,2,3,4,5]</strong>
+15
+Prelude> <strong>product [1,2,3,4,5]</strong>
+120
+Prelude> <strong>reverse [1,2,3,4,5]</strong>
+[5,4,3,2,1]
+Prelude> <strong>filter odd [1,2,3,4,5]</strong>
+[1,3,5]
+Prelude> <strong>0 : [1,2,3,4,5]</strong>
+[0,1,2,3,4,5]
+Prelude> <strong>[1,2,3,4,5] ++ [6,7,8]</strong>
+[1,2,3,4,5,6,7,8]
+						</code></pre>
+					</div>
+					<p><strong>Prelude</strong> is a module containing useful definitions
+						 and functions, included into all Haskell programs by default</p>
+				</section>
+
+				<section>
+					<h2>New slide</h2>
 				</section>
 
 				<section>
@@ -152,46 +285,7 @@ d = a * 2
 				</section>
 
 				<section>
-					<h2>Standard Prelude</h2>
-					<p>Module containing useful definitions and functions,
-						 included into all Haskell programs by default</p>
-					<div class="two-columns">
-						<pre><code class="nohighlight" data-trim data-noescape>
-Prelude> <strong>head [1,2,3,4,5]</strong>
-1
-Prelude> <strong>tail [1,2,3,4,5]</strong>
-[2,3,4,5]
-Prelude> <strong>[1,2,3,4,5] !! 2</strong>
-3
-Prelude> <strong>take 3 [1,2,3,4,5]</strong>
-[1,2,3]
-Prelude> <strong>drop 3 [1,2,3,4,5]</strong>
-[4,5]
-Prelude> <strong>length [1,2,3,4,5]</strong>
-5
-						</code></pre>
-					</div>
-					<div class="two-columns">
-						<pre><code class="nohighlight" data-trim data-noescape>
-Prelude> <strong>sum [1,2,3,4,5]</strong>
-15
-Prelude> <strong>product [1,2,3,4,5]</strong>
-120
-Prelude> <strong>reverse [1,2,3,4,5]</strong>
-[5,4,3,2,1]
-Prelude> <strong>filter odd [1,2,3,4,5]</strong>
-[1,3,5]
-Prelude> <strong>0 : [1,2,3,4,5]</strong>
-[0,1,2,3,4,5]
-Prelude> <strong>[1,2,3,4,5] ++ [6,7,8]</strong>
-[1,2,3,4,5,6,7,8]
-						</code></pre>
-					</div>
-
-				</section>
-
-				<section>
-					<h2>New slide</h2>
+					<h2>Quick Sort</h2>
 				</section>
 
 				<section>
