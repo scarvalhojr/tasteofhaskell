@@ -168,6 +168,11 @@ body {
   word-wrap: normal;
   background: #404040; }
 
+.two-columns {
+   display: inline-block;
+   width: 48%;
+}
+
 .reveal table {
   margin: auto;
   border-collapse: collapse;

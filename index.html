@@ -35,7 +35,7 @@
 				</section>
 
 				<section>
-					<h2>Getting Started</h2>
+					<h2>Before You Start</h2>
 					<p>Ensure you have a Haskell compiler set up or<br>
 						 follow <a href="install.html">these instructions</a> to get <em>Stack</em> installed
 				  </p>
@@ -61,6 +61,133 @@
 						<li class="fragment">Current language standard is Haskell 2010</li>
 						<li class="fragment">Next standard expected for 2020</li>
 					</ul>
+				</section>
+
+				<section>
+					<h2>Functions</h2>
+					<p>Defined with an equation, take one or more parameters</p>
+					<pre><code class="haskell" data-trim data-noescape>
+double x = 2 * x
+					</code></pre>
+					<p>Produce single result when applied to arguments</p>
+					<pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>double 5</strong>
+10
+					</code></pre>
+					<p>Function application can be nested</p>
+					<pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>double (double 5)</strong>
+20
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Imperative vs. Functional Style</h2>
+					<p>Imperative
+					<pre><code class="java" data-trim data-noescape>
+    int total = 0;
+    for (int n = 1; n <= 100; n++)
+      if (n % 2 == 0)
+        total += n;
+					</code></pre>
+					<p>Haskell</p>
+					<pre><code class="haskell" data-trim data-noescape>
+total = sum (filter even [1..100])
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Function and Parameter Names</h2>
+					<ul>
+						<li>Must begin with <strong>lower-case letter</strong></li>
+						<li>Followed by zero or more:</li>
+						<ul>
+							<li>Lower- and upper-case letters</li>
+							<li>Digits, underscores, and foward single-quotes (<strong><code>'</code></strong>)</li>
+						</ul>
+						<li>Examples: <strong><code>myFunc</code></strong>, <strong><code>arg_1</code></strong>,
+							  <strong><code>x'</code></strong>, <strong><code>y''</code></strong></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Comments</h2>
+					<p>Single line</p>
+					<pre><code class="haskell" data-trim data-noescape>
+-- This is a single line of comment
+factorial n = product [1..n]
+					</code></pre>
+					<p>Multiple lines</p>
+					<pre><code class="haskell" data-trim data-noescape>
+{-
+All these lines
+will be ignored
+-}
+factorial n = product [1..n]
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Indentation Indicates Scope</h2>
+					<p>These are equivalent</p>
+					<div class="two-columns">
+						<pre><code class="haskell" data-trim>
+a = b + c
+  where b = 1
+        c = 2
+
+d = a * 2
+						</code></pre>
+					</div>
+					<div class="two-columns">
+						<pre><code class="haskell" data-trim>
+a = b + c
+    where
+      b = 1
+      c = 2
+d = a * 2
+						</code></pre>
+					</div>
+					<p><strong>Do not use tabs</strong> - the compiler will complain!</p>
+				</section>
+
+				<section>
+					<h2>Standard Prelude</h2>
+					<p>Module containing useful definitions and functions,
+						 included into all Haskell programs by default</p>
+					<div class="two-columns">
+						<pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>head [1,2,3,4,5]</strong>
+1
+Prelude> <strong>tail [1,2,3,4,5]</strong>
+[2,3,4,5]
+Prelude> <strong>[1,2,3,4,5] !! 2</strong>
+3
+Prelude> <strong>take 3 [1,2,3,4,5]</strong>
+[1,2,3]
+Prelude> <strong>drop 3 [1,2,3,4,5]</strong>
+[4,5]
+Prelude> <strong>length [1,2,3,4,5]</strong>
+5
+						</code></pre>
+					</div>
+					<div class="two-columns">
+						<pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>sum [1,2,3,4,5]</strong>
+15
+Prelude> <strong>product [1,2,3,4,5]</strong>
+120
+Prelude> <strong>reverse [1,2,3,4,5]</strong>
+[5,4,3,2,1]
+Prelude> <strong>filter odd [1,2,3,4,5]</strong>
+[1,3,5]
+Prelude> <strong>0 : [1,2,3,4,5]</strong>
+[0,1,2,3,4,5]
+Prelude> <strong>[1,2,3,4,5] ++ [6,7,8]</strong>
+[1,2,3,4,5,6,7,8]
+						</code></pre>
+					</div>
+
 				</section>
 
 				<section>
