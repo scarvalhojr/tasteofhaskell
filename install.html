@@ -1,107 +1,107 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>A Taste of Haskell - Getting Started</title>
+    <title>A Taste of Haskell - Getting Started</title>
 
-		<meta name="author" content="Sergio de Carvalho">
+    <meta name="author" content="Sergio de Carvalho">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/moon.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/moon.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
 
-				<section>
-					<h1>A Taste of Haskell</h1>
-					<h2>Getting Started with <em>Stack</em></h2>
-				</section>
+        <section>
+          <h1>A Taste of Haskell</h1>
+          <h2>Getting Started with <em>Stack</em></h2>
+        </section>
 
-				<section>
-					<h2><em>Stack</em> - The Haskell Tool Stack</h2>
-						<ul>
-							<li>Cross-platform tool for developing Haskell projects</li>
-							<li>Installs <strong>GHC</strong> (Glasgow Haskell Compiler)</li>
-							<li>Downloads and installs package dependencies</li>
-							<li>Isolated environments for each project</li>
-							<li>Commands for building, testing, benchmarking, etc.</li>
-						</ul>
-				</section>
+        <section>
+          <h2><em>Stack</em> - The Haskell Tool Stack</h2>
+            <ul>
+              <li>Cross-platform tool for developing Haskell projects</li>
+              <li>Installs <strong>GHC</strong> (Glasgow Haskell Compiler)</li>
+              <li>Downloads and installs package dependencies</li>
+              <li>Isolated environments for each project</li>
+              <li>Commands for building, testing, benchmarking, etc.</li>
+            </ul>
+        </section>
 
-				<section>
-					<h2>Installing Stack</h2>
-					<p>On Linux, MacOs, run from a terminal</p>
-					<pre><code class="nohighlight" data-trim data-noescape>
+        <section>
+          <h2>Installing Stack</h2>
+          <p>On Linux, MacOs, run from a terminal</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
 <strong>curl -sSL https://get.haskellstack.org/ | sh</strong>
-					</code></pre>
-					<p><em>or</em></p>
-					<pre><code class="nohighlight" data-trim data-noescape>
+          </code></pre>
+          <p><em>or</em></p>
+          <pre><code class="nohighlight" data-trim data-noescape>
 <strong>wget -qO- https://get.haskellstack.org/ | sh</strong>
-					</code></pre>
-					<p>On Windows, download and run <a href="https://get.haskellstack.org/stable/windows-x86_64-installer.exe" target="_blank">installer</a></p>
-					<p>Full instructions on <a href="https://docs.haskellstack.org" target="_blank">https://docs.haskellstack.org</a></p>
-				</section>
+          </code></pre>
+          <p>On Windows, download and run <a href="https://get.haskellstack.org/stable/windows-x86_64-installer.exe" target="_blank">installer</a></p>
+          <p>Full instructions on <a href="https://docs.haskellstack.org" target="_blank">https://docs.haskellstack.org</a></p>
+        </section>
 
-				<section>
-					<h2>Hello World!</h2>
-					<p>Type the code in a file <strong><code>helloworld.hs</code></strong></p>
-					<pre><code class="haskell" data-trim data-noescape>
+        <section>
+          <h2>Hello World!</h2>
+          <p>Type the code in a file <strong><code>helloworld.hs</code></strong></p>
+          <pre><code class="haskell" data-trim data-noescape>
 main = putStrLn "Hello, Haskell world!"
-					</code></pre>
-					<p>Compile and execute it with</p>
-					<pre><code class="nohighlight" data-trim data-noescape>
+          </code></pre>
+          <p>Compile and execute it with</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
 > <strong>stack ghc helloworld.hs</strong>
 [1 of 1] Compiling Main         ( helloworld.hs, helloworld.o )
 Linking helloworld ...
 
 > <strong>./helloworld</strong>
 Hello, Haskell world!
-					</code></pre>
-				</section>
+          </code></pre>
+        </section>
 
-				<section>
-					<h2>Interactive Haskell</h2>
-					<p>Start an interactive session (REPL)</p>
-					<pre><code class="nohighlight" data-trim data-noescape>
+        <section>
+          <h2>Interactive Haskell</h2>
+          <p>Start an interactive session (REPL)</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
 > <strong>stack ghci</strong>
 Configuring GHCi with the following packages:
 GHCi, version 8.2.2: http://www.haskell.org/ghc/  :? for help
 Loaded GHCi configuration from ...
 Prelude>
-					</code></pre>
-					<p>Load your Haskell program and call its <strong><code>main</code></strong> function</p>
-					<pre><code class="nohighlight" data-trim data-noescape>
+          </code></pre>
+          <p>Load your Haskell program and call its <strong><code>main</code></strong> function</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
 Prelude> <strong>:load helloworld.hs</strong>
 [1 of 1] Compiling Main         ( helloworld.hs, interpreted )
 Ok, modules loaded: Main.
 
 *Main> <strong>main</strong>
 Hello, Haskell world!
-					</code></pre>
-				</section>
+          </code></pre>
+        </section>
 
-				<section>
-					<h2>Using GHCi</h2>
-					<p>Create functions and evaluate Haskell expressions</p>
-					<pre><code class="nohighlight" data-trim data-noescape>
+        <section>
+          <h2>Using GHCi</h2>
+          <p>Create functions and evaluate Haskell expressions</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
 Prelude> <strong>2 + 3 * (4 ^ 5)</strong>
 3074
 Prelude> <strong>1 < 2</strong>
@@ -109,12 +109,12 @@ True
 Prelude> <strong>factorial 0 = 1; factorial n = n * factorial (n - 1)</strong>
 Prelude> <strong>factorial 50</strong>
 30414093201713378043612608166064768844377641568960512000000000000
-					</code></pre>
-				</section>
+          </code></pre>
+        </section>
 
-				<section>
-					<h2>Multiline Input</h2>
-					<pre><code class="nohighlight" data-trim data-noescape>
+        <section>
+          <h2>Multiline Input</h2>
+          <pre><code class="nohighlight" data-trim data-noescape>
 Prelude> <strong>:{</strong>
 Prelude| <strong>sumList [] = 0</strong>
 Prelude| <strong>sumList (x:xs) = x + sumList xs</strong>
@@ -125,42 +125,42 @@ Prelude> <strong>sumList [1,2,3]</strong>
 6
 Prelude> <strong>sumList [1..10000]</strong>
 50005000
-					</code></pre>
-				</section>
+          </code></pre>
+        </section>
 
-				<section>
-					<h2>Basic GHCi Commands</h2>
-					<pre><code class="nohighlight" data-trim data-noescape>
+        <section>
+          <h2>Basic GHCi Commands</h2>
+          <pre><code class="nohighlight" data-trim data-noescape>
 <strong>:load &lt;file&gt;</strong> or <strong>:l &lt;file&gt;</strong> - load Haskell module
 <strong>:reload</strong> or <strong>:r</strong>             - reload Haskell module
 <strong>:cd &lt;dir&gt;</strong>                 - change directory
 <strong>:! &lt;cmd&gt;</strong>                  - execute shell command
 <strong>:help</strong> or <strong>:?</strong>               - list available commands
 <strong>:quit</strong> or <strong>:q</strong>               - quit GHCi
-					</code></pre>
-				</section>
+          </code></pre>
+        </section>
 
-				<section>
-					<h1>Congratulations</h1>
-					<h2>You're ready to <a href="index.html">start!</a></h2>
-				</section>
+        <section>
+          <h1>Congratulations</h1>
+          <h2>You're ready to <a href="index.html">start!</a></h2>
+        </section>
 
-			</div>
-		</div>
+      </div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-		<script>
-			Reveal.initialize({
-				transition: 'fade',
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+    <script>
+      Reveal.initialize({
+        transition: 'fade',
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
 </html>
