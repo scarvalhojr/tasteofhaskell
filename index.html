@@ -194,6 +194,46 @@ Prelude> <strong>:t "a"</strong>
         </section>
 
         <section>
+          <h2>Function Types</h2>
+          <p>Every expression must have a type, including functions</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:type not</strong>
+not :: Bool -> Bool
+Prelude> <strong>not True</strong>
+False
+Prelude> <strong>not False</strong>
+True
+          </code></pre>
+          <p><strong><code>niceDay</code></strong> takes two <strong><code>Bool</code></strong> and
+             produces a <strong><code>Bool</code></strong> value
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:{</strong>
+Prelude| <strong>niceDay :: Bool -> Bool -> Bool</strong>
+Prelude| <strong>niceDay sunny cold = sunny && not cold</strong>
+Prelude| <strong>:}</strong>
+Prelude> <strong>niceDay True True</strong>
+False
+Prelude> <strong>niceDay True False</strong>
+True
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Type Inference</h2>
+          <p>If not declared, types are inferred (type safety)</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>niceDay sunny cold = sunny && not cold</strong>
+Prelude> <strong>:t niceDay</strong>
+niceDay :: Bool -> Bool -> Bool
+
+Prelude> <strong>double x = x * 2</strong>
+Prelude> <strong>:t double</strong>
+double :: Num a => a -> a
+          </code></pre>
+          <p><strong><code>Num a =></code></strong> is a <em>polymorphic constraint</em></p>
+        </section>
+
+        <section>
           <h2>Lists</h2>
           <p>Sequences of <strong>elements of the same type</strong></p>
           <pre><code class="nohighlight" data-trim data-noescape>
