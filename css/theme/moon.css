@@ -95,6 +95,15 @@ body {
 .reveal em {
   font-style: italic; }
 
+.reveal .redtext {
+  color: #ff2c2d; }
+
+.reveal .greentext {
+  color: #17ff2e; }
+
+.reveal .bluetext {
+  color: #1b91ff; }
+
 .reveal ol,
 .reveal dl,
 .reveal ul {
