@@ -80,8 +80,24 @@ total = sum (filter even [1..100])
         </section>
 
         <section>
+          <h2>Values</h2>
+          <p>Defined with an equation</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>a = 2</strong>
+Prelude> <strong>5 * a</strong>
+10
+Prelude> <strong>b = 10 * a</strong>
+Prelude> <strong>b</strong>
+20
+Prelude> <strong>c = b < 100</strong>
+Prelude> <strong>c</strong>
+True
+          </code></pre>
+        </section>
+
+        <section>
           <h2>Functions</h2>
-          <p>Defined with an equation, take one or more parameters</p>
+          <p>Defined with an equation, take one or more <strong>parameters</strong></p>
           <pre><code class="haskell" data-trim data-noescape>
 double x = 2 * x
           </code></pre>
@@ -114,7 +130,7 @@ Prelude> <strong>add 2 5</strong>
         </section>
 
         <section>
-          <h2>Function and Parameter Names</h2>
+          <h2>Value, Function and Parameter Names</h2>
           <ul>
             <li>Must <strong>begin with lower-case letter</strong></li>
             <li>Followed by zero or more:</li>
@@ -234,6 +250,53 @@ double :: Num a => a -> a
         </section>
 
         <section>
+          <h2>Operators Are Functions</h2>
+          <p>Normally written between two arguments (<strong>infix</strong>)</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t (+)</strong>
+(+) :: Num a => a -> a -> a
+Prelude> <strong>2 + 5</strong>
+7
+Prelude> <strong>:t (&&)</strong>
+(&&) :: Bool -> Bool -> Bool
+Prelude> <strong>True && False</strong>
+False
+          </code></pre>
+          <p>Can also be used in <strong>prefix</strong> notation using brackets</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>(+) 2 5</strong>
+7
+Prelude> <strong>(&&) True False</strong>
+False
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Working with Negative Numbers</h2>
+          <p>Binary subtraction operator and <strong><code>negate</code></strong>
+             function</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t (-)</strong>
+(-) :: Num a => a -> a -> a
+Prelude> <strong>2 - 1</strong>
+1
+Prelude> <strong>:t negate</strong>
+negate :: Num a => a -> a
+Prelude> <strong>negate 1</strong>
+-1
+          </code></pre>
+          <p>Unary minus is syntatic sugar for <strong><code>negate</code></strong></p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>x = -1</strong>
+Prelude> <strong>x</strong>
+-1
+Prelude> <strong>y = 2 * (-1)</strong>
+Prelude> <strong>y</strong>
+-2
+          </code></pre>
+        </section>
+
+        <section>
           <h2>Lists</h2>
           <p>Sequences of <strong>elements of the same type</strong></p>
           <pre><code class="nohighlight" data-trim data-noescape>
@@ -243,10 +306,34 @@ Prelude> <strong>:t ['a','b','c']</strong>
 ['a','b','c'] :: [Char]
 Prelude> <strong>:t ["abc","def"]</strong>
 ["abc","def"] :: [[Char]]
+Prelude> <strong>:t []</strong>
+[] :: [a]
           </code></pre>
           <p>The type of a list conveys no information about its length; in fact,
              lists can be infinite!
           </p>
+        </section>
+
+        <section>
+          <h2>Working with Lists</h2>
+          <p>The <strong>cons</strong> (<strong><code>:</code></strong>) and
+             <strong>concatenation</strong> (<strong><code>++</code></strong>) operators
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t (:)</strong>
+(:) :: a -> [a] -> [a]
+Prelude> <strong>1 : []</strong>
+[1]
+Prelude> <strong>1 : [2, 3]</strong>
+[1,2,3]
+Prelude> <strong>:t (++)</strong>
+(++) :: [a] -> [a] -> [a]
+Prelude> <strong>[1] ++ [2]</strong>
+[1,2]
+Prelude> <strong>[1,2] ++ [3,4]</strong>
+[1,2,3,4]
+Prelude> <strong>[] ++ []</strong>
+[]
+          </code></pre>
         </section>
 
         <section>
@@ -285,6 +372,46 @@ Prelude> <strong>[1,2,3,4,5] ++ [6,7,8]</strong>
           </div>
           <p><strong>Prelude</strong> is a module containing useful definitions
              and functions, included into all Haskell programs by default</p>
+        </section>
+
+        <section>
+          <h2>Tuples</h2>
+          <p>Finite sequence of elements of <strong>possibly different types</strong></p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>a = (True, False)</strong>
+Prelude> <strong>:t a</strong>
+a :: (Bool, Bool)
+Prelude> <strong>b = (1, "haskell", not, (True, 'a'))</strong>
+Prelude> <strong>:t b</strong>
+b :: Num a => (a, [Char], Bool -> Bool, (Bool, Char))
+Prelude> <strong>c = ()</strong>
+Prelude> <strong>:t c</strong>
+c :: ()
+Prelude> <strong class="redtext">d = ("tuple of arity one?")</strong>
+Prelude> <strong>:t d</strong>
+d :: [Char]
+          </code></pre>
+          <p>The number of elements in a tuple is called <strong>arity</strong>;
+             tuples of arity one are not permitted!
+          </p>
+        </section>
+
+        <section>
+          <h2>Working with Tuples</h2>
+          <p>Useful functions for tuples of 2 elements (pairs)</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t fst</strong>
+fst :: (a, b) -> a
+Prelude> <strong>:t snd</strong>
+snd :: (a, b) -> b
+Prelude> <strong>fst (1, True)</strong>
+1
+Prelude> <strong>snd (1, True)</strong>
+True          </code></pre>
+        </section>
+
+        <section>
+          <h2>Exercises</h2>
         </section>
 
         <section>
