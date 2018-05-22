@@ -143,7 +143,7 @@ Prelude> <strong>add 2 5</strong>
                        <span class="greentext"><code>x'</code></span>,
                        <span class="greentext"><code>x''</code></span>
             </li>
-            <li>Invalid: <span class="redtext"><code>MyFunc2</code></span>,
+            <li>Invalid: <span class="redtext"><code>MyFunc</code></span>,
                          <span class="redtext"><code>1arg</code></span>,
                          <span class="redtext"><code>'x</code></span>,
             </li>
@@ -220,16 +220,15 @@ False
 Prelude> <strong>not False</strong>
 True
           </code></pre>
-          <p><strong><code>niceDay</code></strong> takes two <strong><code>Bool</code></strong> and
-             produces a <strong><code>Bool</code></strong> value
+          <p>Functions can be declared with a type</p>
           <pre><code class="nohighlight" data-trim data-noescape>
 Prelude> <strong>:{</strong>
-Prelude| <strong>niceDay :: Bool -> Bool -> Bool</strong>
-Prelude| <strong>niceDay sunny cold = sunny && not cold</strong>
+Prelude| <strong>happy :: Bool -> Bool -> Bool</strong>
+Prelude| <strong>happy sunny cold = sunny && not cold</strong>
 Prelude| <strong>:}</strong>
-Prelude> <strong>niceDay True True</strong>
+Prelude> <strong>happy True True</strong>
 False
-Prelude> <strong>niceDay True False</strong>
+Prelude> <strong>happy True False</strong>
 True
           </code></pre>
         </section>
@@ -238,9 +237,11 @@ True
           <h2>Type Inference</h2>
           <p>If not declared, types are inferred (type safety)</p>
           <pre><code class="nohighlight" data-trim data-noescape>
-Prelude> <strong>niceDay sunny cold = sunny && not cold</strong>
-Prelude> <strong>:t niceDay</strong>
-niceDay :: Bool -> Bool -> Bool
+Prelude> <strong>sad sunny cold = not sunny || cold</strong>
+Prelude> <strong>:t sad</strong>
+sad :: Bool -> Bool -> Bool
+Prelude> <strong>sad True False</strong>
+False
 
 Prelude> <strong>double x = x * 2</strong>
 Prelude> <strong>:t double</strong>
@@ -325,6 +326,7 @@ Prelude> <strong>1 : []</strong>
 [1]
 Prelude> <strong>1 : [2, 3]</strong>
 [1,2,3]
+
 Prelude> <strong>:t (++)</strong>
 (++) :: [a] -> [a] -> [a]
 Prelude> <strong>[1] ++ [2]</strong>
@@ -364,10 +366,10 @@ Prelude> <strong>reverse [1,2,3,4,5]</strong>
 [5,4,3,2,1]
 Prelude> <strong>filter odd [1,2,3,4,5]</strong>
 [1,3,5]
-Prelude> <strong>0 : [1,2,3,4,5]</strong>
-[0,1,2,3,4,5]
-Prelude> <strong>[1,2,3,4,5] ++ [6,7,8]</strong>
-[1,2,3,4,5,6,7,8]
+Prelude> <strong>null [1]</strong>
+False
+Prelude> <strong>null []</strong>
+True
             </code></pre>
           </div>
           <p><strong>Prelude</strong> is a module containing useful definitions
