@@ -1,0 +1,42 @@
+
+# Part 1 - Exercises
+
+1. Use the REPL to find out the type of the following function:
+
+   ```haskell
+   bbq sunny temperature = sunny && temperature > 15
+   ```
+
+1. Predict the type of the following values and confirm them in the REPL:
+
+   ```haskell
+   e1 = head "haskell"
+
+   e2 = take 3 "haskell"
+
+   e3 = length "haskell"
+
+   e4 = ("haskell" !! 2, (null "haskell", reverse "haskell"), 1 :: Int)
+   ```
+
+1. Using `head` and `drop` (and brackets to compose the functions), extract the
+   character `'a'` from the string `"haskell"`.
+
+1. Using `take` and `drop` (and brackets), extract the substring `"as"` from the
+   string `"haskell"`.
+
+1. Given the following string value, construct a string `"all"` from it using
+   cons (`:`), `head` and `drop` (and brackets):
+
+   ```haskell
+   s = "haskell"
+   ```
+
+1. Given the following tuple `t`, extract the value `True` using `fst` and `snd`:
+
+   ```haskell
+   t = (1, (True, "text"))
+   ```
+
+1. Now extract the `'e'` character from the string inside the tuple above using
+   the list function(s) of your choice.
