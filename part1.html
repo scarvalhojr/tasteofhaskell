@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>A Taste of Haskell - Part 1</title>
+
+    <meta name="author" content="Sergio de Carvalho">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/moon.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <section>
+          <h1>A Taste of Haskell</h1>
+          <h2>Part 1</h2>
+        </section>
+
+        <section>
+          <h2>Haskell</h2>
+          <ul>
+            <li>Modern general-purpose programming language</li>
+            <li class="fragment">Strong, static type system with type inference</li>
+            <li class="fragment">Purely functional</li>
+            <li class="fragment">Non-strict semantics (lazy evaluation)</li>
+            <li class="fragment">High-performance parallel garbage collector</li>
+            <li class="fragment">Light-weight concurrency library</li>
+            <li class="fragment">Free and open</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Haskell</h2>
+          <ul>
+            <li>Created in 1987 to unify several developments on functional programming</li>
+            <li class="fragment">Named after mathematician Haskell Brooks Curry</li>
+            <li class="fragment">Current language standard is Haskell 2010</li>
+            <li class="fragment">The Glasgow Haskell Compiler (<strong>GHC</strong>) is the most commonly used compiler</li>
+            <li class="fragment"><strong>Stack</strong> is a cross-platform tool for developing Haskell projects</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Imperative vs. Functional Style</h2>
+          <p>Imperative
+          <pre><code class="java" data-trim data-noescape>
+    int total = 0;
+    for (int n = 1; n <= 100; n++)
+      if (n % 2 == 0)
+        total += n;
+          </code></pre>
+          <p>Functional</p>
+          <pre><code class="haskell" data-trim data-noescape>
+total = sum (filter even [1..100])
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Values</h2>
+          <p>Defined with an equation</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>a = 2</strong>
+Prelude> <strong>5 * a</strong>
+10
+Prelude> <strong>b = 10 * a</strong>
+Prelude> <strong>b</strong>
+20
+Prelude> <strong>c = b < 100</strong>
+Prelude> <strong>c</strong>
+True
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Functions</h2>
+          <p>Defined with an equation, take one or more <strong>parameters</strong></p>
+          <pre><code class="haskell" data-trim data-noescape>
+double x = 2 * x
+          </code></pre>
+          <p>Produce single result when applied to arguments</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>double 5</strong>
+10
+          </code></pre>
+          <p>Function application can be nested</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>double (double 5)</strong>
+20
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Function Application</h2>
+          <p>Parameters and arguments are separated by spaces</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>add x y = x + y</strong>
+Prelude> <strong>add 2 5</strong>
+7
+          </code></pre>
+          <p>Function application has higher priority than other operators so
+             <strong><code>f a + b</code></strong> means <strong><code>(f a) + b</code></strong>
+          </p>
+          <p>Use parantheses to change order of evaluation, e.g.<br>
+             <strong><code>f (a + b)</code></strong>
+          </p>
+        </section>
+
+        <section>
+          <h2>Value, Function and Parameter Names</h2>
+          <ul>
+            <li>Must <strong>begin with a lower-case letter</strong></li>
+            <li>Followed by zero or more:</li>
+            <ul>
+              <li>Lower- and upper-case letters</li>
+              <li>Digits, underscores, and foward single-quotes (<strong><code>'</code></strong>)</li>
+            </ul>
+            <li>Valid: <span class="greentext"><code>myFunc</code></span>,
+                       <span class="greentext"><code>arg_1</code></span>,
+                       <span class="greentext"><code>x'</code></span>,
+                       <span class="greentext"><code>x''</code></span>
+            </li>
+            <li>Invalid: <span class="redtext"><code>MyFunc</code></span>,
+                         <span class="redtext"><code>1arg</code></span>,
+                         <span class="redtext"><code>'x</code></span>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Basic Types</h2>
+          <table>
+            <tbody>
+              <tr>
+                <td><strong><code>Bool</code></strong></td>
+                <td>Logical values</td>
+                <td><strong><code>True</code></strong> and <strong><code>False</code></strong></td>
+              </tr>
+              <tr>
+                <td><strong><code>Char</code></strong></td>
+                <td>Single characters</td>
+                <td><strong><code>'a'</code></strong>, <strong><code>'B'</code></strong>, <strong><code>'1'</code></strong></td>
+              </tr>
+              <tr>
+                <td><strong><code>String</code></strong></td>
+                <td>List of <code>Chars</code></td>
+                <td><strong><code>"abc"</code></strong>, <strong><code>""</code></strong>, <strong><code>"a"</code></strong></td>
+              </tr>
+              <tr>
+                <td><strong><code>Int</code></strong></td>
+                <td>Fixed precision</td>
+                <td><strong><code>1</code></strong>, <strong><code>-10</code></strong>, <strong><code>999</code></strong></td>
+              </tr>
+              <tr>
+                <td><strong><code>Integer</code></strong></td>
+                <td>Arbitrary precision</td>
+                <td><strong><code>99999999999999</code></strong></td>
+              </tr>
+              <tr>
+                <td><strong><code>Float</code></strong></td>
+                <td>Single precision</td>
+                <td><strong><code>1.0</code></strong>, <strong><code>-0.99</code></strong></td>
+              </tr>
+              <tr>
+                <td><strong><code>Double</code></strong></td>
+                <td>Double precision</td>
+                <td><strong><code>999999999999.9</code></strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Types</h2>
+          <p>The notation <strong><code>v :: T</code></strong> indicates
+             <strong><code>v</code></strong> <em>has type</em>
+             <strong><code>T</code></strong>
+          </p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:type True</strong>
+True :: Bool
+Prelude> <strong>:t 'a'</strong>
+'a' :: Char
+Prelude> <strong>:t "a"</strong>
+"a" :: [Char]
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Function Types</h2>
+          <p>Every expression must have a type, including functions</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:type not</strong>
+not :: Bool -> Bool
+Prelude> <strong>not True</strong>
+False
+Prelude> <strong>not False</strong>
+True
+          </code></pre>
+          <p>Functions can be declared with a type</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:{</strong>
+Prelude| <strong>happy :: Bool -> Bool -> Bool</strong>
+Prelude| <strong>happy sunny cold = sunny && not cold</strong>
+Prelude| <strong>:}</strong>
+Prelude> <strong>happy True True</strong>
+False
+Prelude> <strong>happy True False</strong>
+True
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Type Inference</h2>
+          <p>If not declared, types are inferred (type safety)</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>sad sunny cold = not sunny || cold</strong>
+Prelude> <strong>:t sad</strong>
+sad :: Bool -> Bool -> Bool
+Prelude> <strong>sad True False</strong>
+False
+
+Prelude> <strong>double x = x * 2</strong>
+Prelude> <strong>:t double</strong>
+double :: Num a => a -> a
+          </code></pre>
+          <p><strong><code>Num a =></code></strong> is a <em>polymorphic constraint</em></p>
+        </section>
+
+        <section>
+          <h2>Getting Help in GHCi</h2>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:info Num</strong>
+class Num a where
+  (+) :: a -> a -> a
+  (-) :: a -> a -> a
+  (*) :: a -> a -> a
+  negate :: a -> a
+  abs :: a -> a
+  signum :: a -> a
+  fromInteger :: Integer -> a
+  {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
+instance Num Word -- Defined in ‘GHC.Num’
+instance Num Integer -- Defined in ‘GHC.Num’
+instance Num Int -- Defined in ‘GHC.Num’
+instance Num Float -- Defined in ‘GHC.Float’
+instance Num Double -- Defined in ‘GHC.Float’
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Operators Are Functions</h2>
+          <p>Normally written between two arguments (<strong>infix</strong>)</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t (+)</strong>
+(+) :: Num a => a -> a -> a
+Prelude> <strong>2 + 5</strong>
+7
+Prelude> <strong>:t (&&)</strong>
+(&&) :: Bool -> Bool -> Bool
+Prelude> <strong>True && False</strong>
+False
+          </code></pre>
+          <p>Can also be used in <strong>prefix</strong> notation using brackets</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>(+) 2 5</strong>
+7
+Prelude> <strong>(&&) True False</strong>
+False
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Working with Negative Numbers</h2>
+          <p>Binary subtraction operator and <strong><code>negate</code></strong>
+             function</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t (-)</strong>
+(-) :: Num a => a -> a -> a
+Prelude> <strong>2 - 1</strong>
+1
+Prelude> <strong>:t negate</strong>
+negate :: Num a => a -> a
+Prelude> <strong>negate 1</strong>
+-1
+          </code></pre>
+          <p>Unary minus is syntatic sugar for <strong><code>negate</code></strong></p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>x = -1</strong>
+Prelude> <strong>x</strong>
+-1
+Prelude> <strong>y = 2 * (-1)</strong>
+Prelude> <strong>y</strong>
+-2
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Lists</h2>
+          <p>Sequences of <strong>elements of the same type</strong></p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t [True,False,True]</strong>
+[True,False,True] :: [Bool]
+Prelude> <strong>:t ['a','b','c']</strong>
+['a','b','c'] :: [Char]
+Prelude> <strong>:t ["abc","def"]</strong>
+["abc","def"] :: [[Char]]
+Prelude> <strong>:t []</strong>
+[] :: [a]
+          </code></pre>
+          <p>The type of a list conveys no information about its length; in fact,
+             lists can be infinite!
+          </p>
+        </section>
+
+        <section>
+          <h2>Working with Lists</h2>
+          <p>The <strong>cons</strong> (<strong><code>:</code></strong>) and
+             <strong>concatenation</strong> (<strong><code>++</code></strong>) operators
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t (:)</strong>
+(:) :: a -> [a] -> [a]
+Prelude> <strong>1 : []</strong>
+[1]
+Prelude> <strong>1 : [2, 3]</strong>
+[1,2,3]
+
+Prelude> <strong>:t (++)</strong>
+(++) :: [a] -> [a] -> [a]
+Prelude> <strong>[1] ++ [2]</strong>
+[1,2]
+Prelude> <strong>[1,2] ++ [3,4]</strong>
+[1,2,3,4]
+Prelude> <strong>[] ++ []</strong>
+[]
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Some Useful List Functions</h2>
+          <div class="two-columns">
+            <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>head [1,2,3,4,5]</strong>
+1
+Prelude> <strong>tail [1,2,3,4,5]</strong>
+[2,3,4,5]
+Prelude> <strong>[1,2,3,4,5] !! 2</strong>
+3
+Prelude> <strong>take 3 [1,2,3,4,5]</strong>
+[1,2,3]
+Prelude> <strong>drop 3 [1,2,3,4,5]</strong>
+[4,5]
+Prelude> <strong>length [1,2,3,4,5]</strong>
+5
+            </code></pre>
+          </div>
+          <div class="two-columns">
+            <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>sum [1,2,3,4,5]</strong>
+15
+Prelude> <strong>product [1,2,3,4,5]</strong>
+120
+Prelude> <strong>reverse [1,2,3,4,5]</strong>
+[5,4,3,2,1]
+Prelude> <strong>filter odd [1,2,3,4,5]</strong>
+[1,3,5]
+Prelude> <strong>null [1]</strong>
+False
+Prelude> <strong>null []</strong>
+True
+            </code></pre>
+          </div>
+          <p><strong>Prelude</strong> is a module containing useful definitions
+             and functions, included into all Haskell programs by default</p>
+        </section>
+
+        <section>
+          <h2>Tuples</h2>
+          <p>Finite sequence of elements of <strong>possibly different types</strong></p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>a = (True, False)</strong>
+Prelude> <strong>:t a</strong>
+a :: (Bool, Bool)
+Prelude> <strong>b = (1, "haskell", not, (True, 'a'))</strong>
+Prelude> <strong>:t b</strong>
+b :: Num a => (a, [Char], Bool -> Bool, (Bool, Char))
+Prelude> <strong>c = ()</strong>
+Prelude> <strong>:t c</strong>
+c :: ()
+Prelude> <strong class="redtext">d = ("tuple of arity one?")</strong>
+Prelude> <strong>:t d</strong>
+d :: [Char]
+          </code></pre>
+          <p>The number of elements in a tuple is called <strong>arity</strong>;
+             tuples of arity one are not permitted!
+          </p>
+        </section>
+
+        <section>
+          <h2>Working with Tuples</h2>
+          <p>Useful functions for tuples of 2 elements (pairs)</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t fst</strong>
+fst :: (a, b) -> a
+Prelude> <strong>:t snd</strong>
+snd :: (a, b) -> b
+Prelude> <strong>fst (1, True)</strong>
+1
+Prelude> <strong>snd (1, True)</strong>
+True          </code></pre>
+        </section>
+
+        <section>
+          <h2>Hoogle</h2>
+          <ul>
+            <li>Search Haskell libraries by function name or approximate type signature</li>
+            <li>Examples:
+              <ul>
+                <li><code><a href="https://www.haskell.org/hoogle/?hoogle=fst" target="_blank">fst</a></code></li>
+                <li><code><a href="https://www.haskell.org/hoogle/?hoogle=(a%2C+b)+->+a" target="_blank">(a, b) -> a</a></code></li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Exercises</h2>
+          <p><a href="exercises1.md">Part 1</a></p>
+        </section>
+
+        <section>
+          <h2>Continue to <a href="part2.html">part 2</a>...</h2>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      Reveal.initialize({
+        transition: 'fade',
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
+</html>

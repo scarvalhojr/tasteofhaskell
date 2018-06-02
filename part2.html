@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>A Taste of Haskell</title>
+    <title>A Taste of Haskell - Part 2</title>
 
     <meta name="author" content="Sergio de Carvalho">
 
@@ -32,17 +32,65 @@
 
         <section>
           <h1>A Taste of Haskell</h1>
+          <h2>Part 2</h2>
         </section>
 
         <section>
-          <h2>Before You Start</h2>
-          <p>Ensure you have a Haskell compiler set up or<br>
-             follow <a href="install.html">these instructions</a> to get <em>Stack</em> installed
-          </p>
+          <h2>New slide</h2>
         </section>
 
         <section>
-          <h2>Continue to <a href="part1.html">part 1</a>...</h2>
+          <h2>Comments</h2>
+          <p>Single line</p>
+          <pre><code class="haskell" data-trim data-noescape>
+-- This is a single line of comment
+factorial n = product [1..n]
+          </code></pre>
+          <p>Multiple lines</p>
+          <pre><code class="haskell" data-trim data-noescape>
+{-
+All these lines
+will be ignored
+-}
+factorial n = product [1..n]
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Indentation Indicates Scope</h2>
+          <p>These are equivalent</p>
+          <div class="two-columns">
+            <pre><code class="haskell" data-trim>
+a = b + c
+  where b = 1
+        c = 2
+
+d = a * 2
+            </code></pre>
+          </div>
+          <div class="two-columns">
+            <pre><code class="haskell" data-trim>
+a = b + c
+    where
+      b = 1
+      c = 2
+d = a * 2
+            </code></pre>
+          </div>
+          <p><strong>Do not use tabs</strong> - the compiler will complain!</p>
+        </section>
+
+        <section>
+          <h2>Quick Sort</h2>
+        </section>
+
+        <section>
+          <h2>Exercises</h2>
+          <p><a href="exercises2.md">Part 2</a></p>
+        </section>
+
+        <section>
+          <h2>Continue to <a href="part3.html">part 3</a>...</h2>
         </section>
 
       </div>
