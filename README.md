@@ -10,7 +10,7 @@ Start [here](https://scarvalhojr.github.io/tasteofhaskell/)!
 * Part 1
   * Values, functions, types
   * Built-in types, operators
-  * Lists, tuples
+  * Lists, lazy evaluation, tuples
   * [slides](https://scarvalhojr.github.io/tasteofhaskell/part1.html)
   * [exercises](https://scarvalhojr.github.io/tasteofhaskell/exercises1.html)
 * Part 2

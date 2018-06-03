@@ -55,7 +55,7 @@
             <li class="fragment">Named after mathematician Haskell Brooks Curry</li>
             <li class="fragment">Current language standard is Haskell 2010</li>
             <li class="fragment">The Glasgow Haskell Compiler (<strong>GHC</strong>) is the most commonly used compiler</li>
-            <li class="fragment"><strong>Stack</strong> is a cross-platform tool for developing Haskell projects</li>
+            <li class="fragment"><strong>Stack</strong> is a cross-platform tool for developing, testing, building, Haskell projects</li>
           </ul>
         </section>
 
@@ -206,7 +206,7 @@ Prelude> <strong>:t "a"</strong>
 
         <section>
           <h2>Function Types</h2>
-          <p>Every expression must have a type, including functions</p>
+          <p>Every expression has a type, including functions</p>
           <pre><code class="nohighlight" data-trim data-noescape>
 Prelude> <strong>:type not</strong>
 not :: Bool -> Bool
@@ -230,7 +230,7 @@ True
 
         <section>
           <h2>Type Inference</h2>
-          <p>If not declared, types are inferred (type safety)</p>
+          <p>If not declared, types are inferred</p>
           <pre><code class="nohighlight" data-trim data-noescape>
 Prelude> <strong>sad sunny cold = not sunny || cold</strong>
 Prelude> <strong>:t sad</strong>
@@ -285,6 +285,31 @@ Prelude> <strong>(+) 2 5</strong>
 7
 Prelude> <strong>(&&) True False</strong>
 False
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>More Operators</h2>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t (==)</strong>
+(==) :: Eq a => a -> a -> Bool
+Prelude> <strong>1 == 2</strong>
+False
+Prelude> <strong>:t (/=)</strong>
+(/=) :: Eq a => a -> a -> Bool
+Prelude> <strong>1 /= 2</strong>
+True
+          </code></pre>
+          <p>Functions can be used in <strong>infix</strong> notation using backticks</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t div</strong>
+div :: Integral a => a -> a -> a
+Prelude> <strong>10 `div` 3</strong>
+3
+Prelude> <strong>:t mod</strong>
+mod :: Integral a => a -> a -> a
+Prelude> <strong>10 `mod` 3</strong>
+1
           </code></pre>
         </section>
 
@@ -393,6 +418,26 @@ True
         </section>
 
         <section>
+          <h2>Lazy Evaluation</h2>
+          <p>Expressions are not evaluated until results are needed</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>take 5 [1..]</strong>
+[1,2,3,4,5]
+Prelude> <strong>take 10 [1..]</strong>
+[1,2,3,4,5,6,7,8,9,10]
+Prelude> <strong>sum (take 1000 (filter even [1..]))</strong>
+1001000
+
+Prelude> <strong>:t repeat</strong>
+repeat :: a -> [a]
+Prelude> <strong>take 10 (repeat 1)</strong>
+[1,1,1,1,1,1,1,1,1,1]
+          </code></pre>
+          <p>It is possible to force the evaluation of an expression, and
+             Haskell libraries often come with strict variants</p>
+        </section>
+
+        <section>
           <h2>Tuples</h2>
           <p>Finite sequence of elements of <strong>possibly different types</strong></p>
           <pre><code class="nohighlight" data-trim data-noescape>
@@ -432,7 +477,8 @@ True          </code></pre>
           <h2>Hoogle</h2>
           <ul>
             <li>Search Haskell libraries by function name or approximate type signature</li>
-            <li>Examples:
+            <li><a href="https://www.haskell.org/hoogle" target="_blank">www.haskell.org/hoogle</a></li>
+            <li>Example searches:
               <ul>
                 <li><code><a href="https://www.haskell.org/hoogle/?hoogle=fst" target="_blank">fst</a></code></li>
                 <li><code><a href="https://www.haskell.org/hoogle/?hoogle=(a%2C+b)+->+a" target="_blank">(a, b) -> a</a></code></li>

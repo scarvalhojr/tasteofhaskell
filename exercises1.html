@@ -8,32 +8,86 @@
 
 # Part 1 - Exercises
 
-1. Use the REPL to find out the type of the following function:
+1. Predict the _type_ of the following values and confirm them in the REPL (GHCi):
 
    ```haskell
+   e1 = 1 > 2
+
+   e2 = 1 * 2
+
+   e3 = (1 :: Int) * 2
+
+   e4 = (1 :: Float) * 2
+
+   e5 = not (not True)
+
+   e6 = 'h' : "askell"
+
+   e7 = [True] ++ [False]
+
+   e8 = head "haskell"
+
+   e9 = take 3 "haskell"
+
+   e10 = length "haskell"
+
+   e11 = take 26 ['a'..]
+
+   e12 = sum (take 1000 (filter odd ([1..] :: [Integer])))
+
+   e13 = fst ("haskell", (&&))
+
+   e14 = snd ("haskell", (&&))
+
+   e15 = ("haskell" !! 2, (null "haskell", reverse "haskell"), 1 :: Int)
+   ```
+
+1. Predict the _type_ of the following functions and confirm them in the REPL -
+   don't worry too much with the polymorphic constraints:
+
+   ```haskell
+   minor age = age >= 18
+
    bbq sunny temperature = sunny && temperature > 15
+
+   succeeded codes = null (filter (/=200) codes)
    ```
 
-1. Predict the type of the following values and confirm them in the REPL:
+1. What's wrong with the following expressions?
 
    ```haskell
-   e1 = head "haskell"
+   e1 = 1 > '0'
 
-   e2 = take 3 "haskell"
+   e2 = (1 :: Int) * (2 :: Integer)
 
-   e3 = length "haskell"
+   e3 = 'h' ++ "askell"
 
-   e4 = ("haskell" !! 2, (null "haskell", reverse "haskell"), 1 :: Int)
+   e4 = "h" : "askell"
+
+   e5 = fst [1,2,3]
+
+   e6 = fst (1,2,3)
+
+   e7 = 2 * - 1
+
+   e8 = [1,'1']
+
+   9e = "something's wrong"
+
+   E10 = "even worse"
+
+   'e11 = "oops"
+
    ```
 
-1. Using `head` and `drop` (and brackets to compose the functions), extract the
-   character `'a'` from the string `"haskell"`.
+1. Using `head` and `drop` (and brackets!), extract the character `'a'` from the
+   string `"haskell"`.
 
-1. Using `take` and `drop` (and brackets), extract the substring `"as"` from the
+1. Using `tail` and `take`, extract the substring `"as"` from the
    string `"haskell"`.
 
 1. Given the following string value, construct a string `"all"` from it using
-   cons (`:`), `head` and `drop` (and brackets):
+   cons (`:`), `head` and `drop`:
 
    ```haskell
    s = "haskell"
@@ -46,7 +100,12 @@
    ```
 
 1. Now extract the `'e'` character from the string inside the tuple above using
-   the list function(s) of your choice.
+   a combination of tuple and list functions of your choice.
+
+1. Use Hoogle to find a function that replicates a value a number of times -
+   it's type signature is `Int -> a -> [a]`. How do you use it?
+
+1. Use Hoogle to find out what the `cycle` function does. How do you use it?
 
     </xmp>
     <script src="v/0.2/strapdown.js"></script>
