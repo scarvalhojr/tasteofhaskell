@@ -14,6 +14,9 @@ Start [here](https://scarvalhojr.github.io/tasteofhaskell/)!
   * [slides](https://scarvalhojr.github.io/tasteofhaskell/part1.html)
   * [exercises](https://scarvalhojr.github.io/tasteofhaskell/exercises1.html)
 * Part 2
+  * Currying, high-order functions
+  * Processing lists, polymorphic types
+  * Typeclass constraints and built-in typeclasses
   * [slides](https://scarvalhojr.github.io/tasteofhaskell/part2.html)
   * [exercises](https://scarvalhojr.github.io/tasteofhaskell/exercises2.html)
 * Part 3
@@ -22,7 +25,7 @@ Start [here](https://scarvalhojr.github.io/tasteofhaskell/)!
 
 ## Credits
 
-* Many examples borrowed from [Programming in Haskell](http://www.cs.nott.ac.uk/~pszgmh/pih.html)
+* Many examples were borrowed from [Programming in Haskell](http://www.cs.nott.ac.uk/~pszgmh/pih.html)
   and [Haskell Programming From First Principles](http://haskellbook.com)
 * Slides created with [Reveal.js](https://revealjs.com)
 * Exercise pages created with [Strapdown.js](http://strapdownjs.com)

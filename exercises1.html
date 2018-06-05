@@ -53,6 +53,24 @@
    succeeded codes = null (filter (/=200) codes)
    ```
 
+1. Write down definitions that match the declared types, replacting the
+   `undefined` values; it does not matter what the actual values are or what the
+   functions do, as long as they are type correct:
+
+```haskell
+bools :: [Bool]
+bools = undefined
+
+nums :: [[Int]]
+nums = undefined
+
+record :: ([Char], Int, Bool)
+record = undefined
+
+add :: Int -> Int -> Int -> Int
+add = undefined
+```
+
 1. What's wrong with the following expressions?
 
    ```haskell
