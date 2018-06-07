@@ -8,6 +8,31 @@
 
 # Part 2 - Exercises
 
+1. What is the type of the following functions - take care to include the
+   necessary typeclass constraints when necessary:
+
+```haskell
+second xs = head (tail xs)
+
+swap (x,y) = (y,x)
+
+pair x y = (x, y)
+
+palindrome xs = reverse xs == xs
+```
+
+1. Write down definitions that match the declared types, replacing the
+   `undefined` values; it does not matter what the actual values are or what the
+   functions do, as long as they are type correct:
+
+```haskell
+copy :: a -> (a, a)
+copy = undefined
+
+apply :: (a -> b) -> a -> b
+apply = undefined
+```
+
     </xmp>
     <script src="v/0.2/strapdown.js"></script>
   </head>

@@ -36,6 +36,157 @@
         </section>
 
         <section>
+          <h2>Polymorphic Types</h2>
+          <p>Types that contain one or more <strong>type variables</strong></p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t head</strong>
+head :: [a] -> a
+Prelude> <strong>head [1..10]</strong>
+1
+Prelude> <strong>head [True,False,True]</strong>
+True
+Prelude> <strong>head "haskell"</strong>
+'h'
+Prelude> <strong>head ["haskell","is","cool"]</strong>
+"haskell"
+          </code></pre>
+          <p>Type variables must begin with lower-case letters<br>and are usually named
+             <strong><code>a</strong></code>, <strong><code>b</strong></code>, <strong><code>c</strong></code>...
+          </p>
+        </section>
+
+        <section>
+          <h2>Polymorphic Types</h2>
+          <pre><code class="haskell" data-trim data-noescape>
+tail :: [a] -> [a]
+
+take :: Int -> [a] -> [a]
+
+filter :: (a -> Bool) -> [a] -> [a]
+
+map :: (a -> b) -> [a] -> [b]
+
+replicate :: Int -> a -> [a]
+
+(!!) :: [a] -> Int -> a
+
+fst :: (a, b) -> a
+
+snd :: (a, b) -> b
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Typeclass Constraints</h2>
+          <p><strong><code>C a =></strong></code> indicates that the type variable
+             <strong><code>a</strong></code> must implement the <strong><code>C</strong></code> typeclass</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t (>)</strong>
+(>) :: Ord a => a -> a -> Bool
+Prelude> <strong>2 > 1</strong>
+True
+Prelude> <strong>'b' > 'a'</strong>
+True
+Prelude> <strong>"Haskell is great" > "Haskell is cool"</strong>
+True
+Prelude> <strong>[2,1,0] > [2,0,5]</strong>
+True
+Prelude> <strong class="redtext">even > odd</strong>
+No instance for (Ord (Integer -> Bool)) arising from a use of ‘>’
+Prelude> <strong class="redtext">'2' > 1</strong>
+No instance for (Num Char) arising from the literal ‘1’
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Built-in Typeclasses</h2>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:info Ord</strong>
+          </code></pre>
+          <pre><code class="haskell" data-trim data-noescape>
+class Eq a => Ord a where
+  compare :: a -> a -> Ordering
+  (<) :: a -> a -> Bool
+  (<=) :: a -> a -> Bool
+  (>) :: a -> a -> Bool
+  (>=) :: a -> a -> Bool
+  max :: a -> a -> a
+  min :: a -> a -> a
+  {-# MINIMAL compare | (<=) #-}
+instance Ord Int -- Defined in ‘GHC.Classes’
+instance Ord Float -- Defined in ‘GHC.Classes’
+instance Ord Double -- Defined in ‘GHC.Classes’
+instance Ord Char -- Defined in ‘GHC.Classes’
+instance Ord Bool -- Defined in ‘GHC.Classes’
+...
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Built-in Typeclasses</h2>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:info Eq</strong>
+          </code></pre>
+          <pre><code class="haskell" data-trim data-noescape>
+class Eq a where
+  (==) :: a -> a -> Bool
+  (/=) :: a -> a -> Bool
+  {-# MINIMAL (==) | (/=) #-}
+instance Eq Int -- Defined in ‘GHC.Classes’
+instance Eq Float -- Defined in ‘GHC.Classes’
+instance Eq Double -- Defined in ‘GHC.Classes’
+instance Eq Char -- Defined in ‘GHC.Classes’
+instance Eq Bool -- Defined in ‘GHC.Classes’
+...
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Built-in Typeclasses</h2>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:info Num</strong>
+          </code></pre>
+          <pre><code class="haskell" data-trim data-noescape>
+class Num a where
+  (+) :: a -> a -> a
+  (-) :: a -> a -> a
+  (*) :: a -> a -> a
+  negate :: a -> a
+  abs :: a -> a
+  signum :: a -> a
+  fromInteger :: Integer -> a
+  {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
+instance Num Word -- Defined in ‘GHC.Num’
+instance Num Integer -- Defined in ‘GHC.Num’
+instance Num Int -- Defined in ‘GHC.Num’
+instance Num Float -- Defined in ‘GHC.Float’
+instance Num Double -- Defined in ‘GHC.Float’
+...
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Type Inference</h2>
+          <p>Haskell infers types as generic as possible</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>add x y = x + y</strong>
+Prelude> <strong>:t add</strong>
+add :: Num a => a -> a -> a
+Prelude> <strong>add 2 5</strong>
+7
+Prelude> <strong>add 2.0 5.0</strong>
+7.0
+
+Prelude> <strong>:{</strong>
+Prelude| <strong>addInts :: Int -> Int -> Int</strong>
+Prelude| <strong>addInts x y = x + y</strong>
+Prelude| <strong>:}</strong>
+Prelude> <strong class="redtext">addInts 2.0 5.0</strong>
+No instance for (Fractional Int) arising from the literal ‘2.0’
+          </code></pre>
+        </section>
+
+        <section>
           <h2>Currying</h2>
           <p>A partially-applied function is also a function</p>
           <pre><code class="nohighlight" data-trim data-noescape>
@@ -114,153 +265,59 @@ Prelude> <strong>reverse ["haskell","is","cool"]</strong>
         </section>
 
         <section>
-          <h2>Polymorphic Types</h2>
-          <p>Types that contain one or more <strong>type variables</strong></p>
-          <pre><code class="nohighlight" data-trim data-noescape>
-Prelude> <strong>:t head</strong>
-head :: [a] -> a
-Prelude> <strong>head [1..10]</strong>
-1
-Prelude> <strong>head [True,False,True]</strong>
-True
-Prelude> <strong>head "haskell"</strong>
-'h'
-Prelude> <strong>head ["haskell","is","cool"]</strong>
-"haskell"
-          </code></pre>
-          <p>Type variables must begin with lower-case letters<br>and are usually named
-             <strong><code>a</strong></code>, <strong><code>b</strong></code>, <strong><code>c</strong></code>...
-          </p>
-        </section>
-
-        <section>
-          <h2>Polymorphic Types</h2>
+          <h2>Defining Functions</h2>
           <pre><code class="haskell" data-trim data-noescape>
-tail :: [a] -> [a]
+even n :: Integral a => a -> Bool
+even n = n `mod` 2 == 0
 
-take :: Int -> [a] -> [a]
+splitAt :: Int -> [a] -> ([a], [a])
+splitAt n xs = (take n xs, drop n xs)
 
-filter :: (a -> Bool) -> [a] -> [a]
-
-map :: (a -> b) -> [a] -> [b]
-
-replicate :: Int -> a -> [a]
-
-(!!) :: [a] -> Int -> a
-
-fst :: (a, b) -> a
-
-snd :: (a, b) -> b
+recip :: Fractional a => a -> a
+recip n = 1 / n
+          </code></pre>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>even 9</strong>
+False
+Prelude> <strong>even 10</strong>
+True
+Prelude> <strong>splitAt 3 [1..10]</strong>
+([1,2,3],[4,5,6,7,8,9,10])
+Prelude> <strong>splitAt 7 "haskellcurry"</strong>
+("haskell","curry")
+Prelude> <strong>recip 10</strong>
+0.1
           </code></pre>
         </section>
 
         <section>
-          <h2>Typeclass Constraints</h2>
-          <p><strong><code>C a =></strong></code> indicates that the type variable
-             <strong><code>a</strong></code> must implement the <strong><code>C</strong></code> typeclass</p>
-          <pre><code class="nohighlight" data-trim data-noescape>
-Prelude> <strong>:t (>)</strong>
-(>) :: Ord a => a -> a -> Bool
-Prelude> <strong>2 > 1</strong>
-True
-Prelude> <strong>'b' > 'a'</strong>
-True
-Prelude> <strong>"Haskell is great" > "Haskell is cool"</strong>
-True
-Prelude> <strong>2.1 > 2.0</strong>
-True
-Prelude> <strong class="redtext">'a' > 0</strong>
-<strong class="redtext">error</strong>
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Type Inference</h2>
-          <p>Haskell infers types as generic as possible</p>
-          <pre><code class="nohighlight" data-trim data-noescape>
-Prelude> <strong>add x y = x + y</strong>
-Prelude> <strong>:t add</strong>
-add :: Num a => a -> a -> a
-Prelude> <strong>add 2 5</strong>
-7
-Prelude> <strong>add 2.0 5.0</strong>
-7.0
-
-Prelude> <strong>:{</strong>
-Prelude| <strong>addInts :: Int -> Int -> Int</strong>
-Prelude| <strong>addInts x y = x + y</strong>
-Prelude| <strong>:}</strong>
-Prelude> <strong class="redtext">addInts 2.0 5.0</strong>
-<strong class="redtext">error</strong>
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Built-in Typeclasses</h2>
-          <pre><code class="nohighlight" data-trim data-noescape>
-Prelude> <strong>:info Num</strong>
-          </code></pre>
+          <h2>Conditional Expressions</h2>
+          <p>A <strong>condition</strong> and two results of the <strong>same type</strong></p>
           <pre><code class="haskell" data-trim data-noescape>
-class Num a where
-  (+) :: a -> a -> a
-  (-) :: a -> a -> a
-  (*) :: a -> a -> a
-  negate :: a -> a
-  abs :: a -> a
-  signum :: a -> a
-  fromInteger :: Integer -> a
-  {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
-instance Num Word -- Defined in ‘GHC.Num’
-instance Num Integer -- Defined in ‘GHC.Num’
-instance Num Int -- Defined in ‘GHC.Num’
-instance Num Float -- Defined in ‘GHC.Float’
-instance Num Double -- Defined in ‘GHC.Float’
-...
+abs :: Int -> Int
+abs n = if n >= 0 then n else -n
+
+signum :: Int -> Int
+signum n = if n < 0 then -1 else if n == 0 then 0 else 1
           </code></pre>
+          <p>The else branch must always exist!</p>
         </section>
 
         <section>
-          <h2>Built-in Typeclasses</h2>
-          <pre><code class="nohighlight" data-trim data-noescape>
-Prelude> <strong>:info Eq</strong>
-          </code></pre>
+          <h2>Guarded Equations</h2>
+          <p>Sequence of logical expressions</p>
           <pre><code class="haskell" data-trim data-noescape>
-class Eq a where
-  (==) :: a -> a -> Bool
-  (/=) :: a -> a -> Bool
-  {-# MINIMAL (==) | (/=) #-}
-instance Eq Int -- Defined in ‘GHC.Classes’
-instance Eq Float -- Defined in ‘GHC.Classes’
-instance Eq Double -- Defined in ‘GHC.Classes’
-instance Eq Char -- Defined in ‘GHC.Classes’
-instance Eq Bool -- Defined in ‘GHC.Classes’
-...
+abs n | n >= 0      = n
+      | otherwise   = -n
+
+signum n | n < 0     = -1
+         | n == 0    = 0
+         | otherwise = 1
           </code></pre>
+          <p><strong><code>otherwise</code></strong> matches anything and is a
+             safe way to handle all other cases - and avoid an error!</p>
         </section>
 
-        <section>
-          <h2>Built-in Typeclasses</h2>
-          <pre><code class="nohighlight" data-trim data-noescape>
-Prelude> <strong>:info Ord</strong>
-          </code></pre>
-          <pre><code class="haskell" data-trim data-noescape>
-class Eq a => Ord a where
-  compare :: a -> a -> Ordering
-  (<) :: a -> a -> Bool
-  (<=) :: a -> a -> Bool
-  (>) :: a -> a -> Bool
-  (>=) :: a -> a -> Bool
-  max :: a -> a -> a
-  min :: a -> a -> a
-  {-# MINIMAL compare | (<=) #-}
-instance Ord Int -- Defined in ‘GHC.Classes’
-instance Ord Float -- Defined in ‘GHC.Classes’
-instance Ord Double -- Defined in ‘GHC.Classes’
-instance Ord Char -- Defined in ‘GHC.Classes’
-instance Ord Bool -- Defined in ‘GHC.Classes’
-...
-          </code></pre>
-        </section>
 
         <section>
           <h2>New slide</h2>
