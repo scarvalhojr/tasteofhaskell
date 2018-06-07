@@ -88,6 +88,7 @@ Prelude> <strong>c = b < 100</strong>
 Prelude> <strong>c</strong>
 True
           </code></pre>
+          <p>Values in Haskell are <strong>immutable</strong></p>
         </section>
 
         <section>
@@ -304,10 +305,10 @@ True
           <pre><code class="nohighlight" data-trim data-noescape>
 Prelude> <strong>:t div</strong>
 div :: Integral a => a -> a -> a
+Prelude> <strong>div 10 3</strong>
+3
 Prelude> <strong>10 `div` 3</strong>
 3
-Prelude> <strong>:t mod</strong>
-mod :: Integral a => a -> a -> a
 Prelude> <strong>10 `mod` 3</strong>
 1
           </code></pre>
@@ -421,16 +422,18 @@ True
           <h2>Lazy Evaluation</h2>
           <p>Expressions are not evaluated until results are needed</p>
           <pre><code class="nohighlight" data-trim data-noescape>
-Prelude> <strong>take 5 [1..]</strong>
+Prelude> <strong>infinity = [1..]</strong>
+Prelude> <strong>take 5 infinity</strong>
 [1,2,3,4,5]
-Prelude> <strong>take 10 [1..]</strong>
+Prelude> <strong>take 10 infinity</strong>
 [1,2,3,4,5,6,7,8,9,10]
-Prelude> <strong>sum (take 1000 (filter even [1..]))</strong>
+Prelude> <strong>sum (take 1000 (filter even infinity))</strong>
 1001000
 
 Prelude> <strong>:t repeat</strong>
 repeat :: a -> [a]
-Prelude> <strong>take 10 (repeat 1)</strong>
+Prelude> <strong>repeatedOnes = repeat 1</strong>
+Prelude> <strong>take 10 repeatedOnes</strong>
 [1,1,1,1,1,1,1,1,1,1]
           </code></pre>
           <p>It is possible to force the evaluation of an expression, and

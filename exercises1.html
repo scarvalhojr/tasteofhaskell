@@ -39,7 +39,15 @@
 
    e14 = snd ("haskell", (&&))
 
-   e15 = ("haskell" !! 2, (null "haskell", reverse "haskell"), 1 :: Int)
+   e15 = snd ("haskell", (&& True))
+
+   e16 = snd ("haskell", ((&&) True False))
+
+   e17 = ("haskell" !! 2, (null "haskell", reverse "haskell"), 1 :: Int)
+
+   e18 = ("haskell")
+
+   e19 = repeat True
    ```
 
 1. Predict the _type_ of the following functions and confirm them in the REPL -
@@ -48,9 +56,11 @@
    ```haskell
    minor age = age >= 18
 
-   bbq sunny temperature = sunny && temperature > 15
+   bbq sunny temperature = (&&) sunny (temperature > 15)
 
    succeeded codes = null (filter (/=200) codes)
+
+   palindrome w = w == reverse w
    ```
 
 1. Write down definitions that match the declared types, replacting the
@@ -69,6 +79,9 @@ record = undefined
 
 add :: Int -> Int -> Int -> Int
 add = undefined
+
+(-+) :: Num a => a -> a -> a -> a
+(-+) = undefined
 ```
 
 1. What's wrong with the following expressions?
@@ -94,8 +107,11 @@ add = undefined
 
    E10 = "even worse"
 
-   'e11 = "oops"
+   e11 = 10 mod 3
 
+   e12 = + 2 5
+
+   'e13 = "oops"
    ```
 
 1. Using `head` and `drop` (and brackets!), extract the character `'a'` from the
