@@ -166,6 +166,27 @@ instance Num Double -- Defined in ‘GHC.Float’
         </section>
 
         <section>
+          <h2>Built-in Typeclasses</h2>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:info Show</strong>
+          </code></pre>
+          <pre><code class="haskell" data-trim data-noescape>
+class Show a where
+  showsPrec :: Int -> a -> ShowS
+  show :: a -> String
+  showList :: [a] -> ShowS
+  {-# MINIMAL showsPrec | show #-} -- Defined in ‘GHC.Show’
+instance Show a => Show [a] -- Defined in ‘GHC.Show’
+instance Show Word -- Defined in ‘GHC.Show’
+instance Show Integer -- Defined in ‘GHC.Show’
+instance Show Int -- Defined in ‘GHC.Show’
+instance Show Char -- Defined in ‘GHC.Show’
+instance Show Bool -- Defined in ‘GHC.Show’
+...
+          </code></pre>
+        </section>
+
+        <section>
           <h2>Type Inference</h2>
           <p>Haskell infers types as generic as possible</p>
           <pre><code class="nohighlight" data-trim data-noescape>
@@ -304,71 +325,166 @@ signum n = if n < 0 then -1 else if n == 0 then 0 else 1
         </section>
 
         <section>
-          <h2>Guarded Equations</h2>
-          <p>Sequence of logical expressions</p>
+          <h2>Guards</h2>
+          <p>Sequence of logical expressions, with their own results</p>
           <pre><code class="haskell" data-trim data-noescape>
-abs n | n >= 0      = n
-      | otherwise   = -n
+abs n | n >= 0     = n
+      | otherwise  = -n
 
-signum n | n < 0     = -1
-         | n == 0    = 0
-         | otherwise = 1
+signum n
+  | n < 0      = -1
+  | n == 0     = 0
+  | otherwise  = 1
           </code></pre>
           <p><strong><code>otherwise</code></strong> matches anything and is a
              safe way to handle all other cases - and avoid an error!</p>
         </section>
 
+        <section>
+          <h2>Pattern Matching</h2>
+          <p>Match argument values against patterns</p>
+          <pre><code class="haskell" data-trim data-noescape>
+not :: Bool -> Bool
+not True  = False
+not False = True
+
+(&&) :: Bool -> Bool -> Bool
+True  && True  = True
+True  && False = False
+False && True  = False
+False && False = False
+          </code></pre>
+          <p>A non-exhaustive pattern can cause an exception</p>
+        </section>
 
         <section>
-          <h2>New slide</h2>
-          <p></p>
+          <h2>Pattern Matching</h2>
+          <p>Underscores match anything; variables bind to values</p>
+          <pre><code class="haskell" data-trim data-noescape>
+(&&) :: Bool -> Bool -> Bool
+True  && True  = True
+_     && _     = False
+
+(&&) :: Bool -> Bool -> Bool
+True  && b  = b
+False && _  = False
+
+(&&) :: Bool -> Bool -> Bool
+b && b = b
+_ && _ = False
+          </code></pre>
+          <p>Values may not be evaluated due to lazy evaluation</p>
+        </section>
+
+        <section>
+          <h2>Pattern Matching with Lists</h2>
+          <pre><code class="haskell" data-trim data-noescape>
+alpha :: [Int] -> Bool
+alpha [0,_,_] = True
+alpha _       = False
+
+alpha' :: [Int] -> Bool
+alpha' (0:_) = True
+alpha' _     = False
+          </code></pre>
           <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>alpha [0,1,2]</strong>
+True
+Prelude> <strong>alpha [0,1]</strong>
+False
+Prelude> <strong>alpha' [0]</strong>
+True
+Prelude> <strong>alpha' [0..]</strong>
+True
           </code></pre>
         </section>
 
         <section>
-          <h2>Comments</h2>
-          <p>Single line</p>
+          <h2>Pattern Matching with Lists</h2>
           <pre><code class="haskell" data-trim data-noescape>
--- This is a single line of comment
-factorial n = product [1..n]
+head :: [a] -> a
+head (x:_) = x
+
+tail :: [a] -> [a]
+tail (_:xs) -> xs
+
+dropThird (x1:x2:_:xs) = x1 : x2 : xs
+dropThird xs           = xs
           </code></pre>
-          <p>Multiple lines</p>
-          <pre><code class="haskell" data-trim data-noescape>
-{-
-All these lines
-will be ignored
--}
-factorial n = product [1..n]
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>dropThird [1..10]</strong>
+[1,2,4,5,6,7,8,9,10]
+Prelude> <strong>1:2:3:4:5:6:[]</strong>
+[1,2,3,4,5,6]
           </code></pre>
         </section>
 
         <section>
-          <h2>Indentation Indicates Scope</h2>
-          <p>These are equivalent</p>
-          <div class="two-columns">
-            <pre><code class="haskell" data-trim>
-a = b + c
-  where b = 1
-        c = 2
+          <h2>Pattern Matching with Tuples</h2>
+          <pre><code class="haskell" data-trim data-noescape>
+fst :: (a,b) -> a
+fst (x,_) = x
 
-d = a * 2
-            </code></pre>
-          </div>
-          <div class="two-columns">
-            <pre><code class="haskell" data-trim>
-a = b + c
-    where
-      b = 1
-      c = 2
-d = a * 2
-            </code></pre>
-          </div>
+snd :: (a,b) -> b
+snd (_,x) = x
+
+third :: (a,b,c) -> c
+third (_,_,x) = x
+          </code></pre>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>third (1, True, "haskell")</strong>
+"haskell"
+Prelude> <strong>third ('a', even, (False, 10.0))</strong>
+(False,10.0)
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Where Declarations</h2>
+          <p>Bound to a scope (indicated by indentation)</p>
+          <pre><code class="haskell" data-trim data-noescape>
+qsort []     = []
+qsort (x:xs) = qsort smaller ++ [x] ++ qsort larger
+  where smaller = filter (<= x) xs
+        larger  = filter (> x) xs
+
+dist (x1,y1) (x2,y2) = sqrt (dx + dy)
+  where
+  dx = (x1 - x2) ^ 2
+  dy = (y1 - y2) ^ 2
+          </code></pre>
           <p><strong>Do not use tabs</strong> - the compiler will complain!</p>
         </section>
 
         <section>
-          <h2>Quick Sort</h2>
+          <h2>Let Expressions</h2>
+          <p>Can be used wherever expressions are allowed</p>
+          <pre><code class="haskell" data-trim data-noescape>
+dist (x1,y1) (x2,y2) =
+  let dx = (x1 - x2) ^ 2
+      dy = (y1 - y2) ^ 2
+   in sqrt (dx + dy)
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Lambda Expressions</h2>
+          <p>The symbol <strong><code>\</code></strong> stands for the Greek
+             letter <strong>&lambda;</strong></p>
+          <pre><code class="haskell" data-trim data-noescape>
+\ x -> 2 * x
+          </code></pre>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>(\x y -> x + y) 2 5</strong>
+7
+
+Prelude> <strong>filter (\x -> x `mod` 7 == 0) [1..100]</strong>
+[7,14,21,28,35,42,49,56,63,70,77,84,91,98]
+
+Prelude> <strong>records = [(1,True,"haskell"), (2,False,"curry")]</strong>
+Prelude> <strong>fmap (\(x,_,y) -> (10 * x,head y)) records</strong>
+[(10,'h'),(20,'c')]
+          </code></pre>
         </section>
 
         <section>
@@ -389,6 +505,7 @@ d = a * 2
     <script>
       Reveal.initialize({
         transition: 'fade',
+        history: true,
         dependencies: [
           { src: 'plugin/markdown/marked.js' },
           { src: 'plugin/markdown/markdown.js' },

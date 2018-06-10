@@ -14,9 +14,13 @@ Start [here](https://scarvalhojr.github.io/tasteofhaskell/)!
   * [slides](https://scarvalhojr.github.io/tasteofhaskell/part1.html)
   * [exercises](https://scarvalhojr.github.io/tasteofhaskell/exercises1.html)
 * Part 2
+  * Polymorphic types, typeclass constraints
+  * Built-in typeclasses
   * Currying, high-order functions
-  * Processing lists, polymorphic types
-  * Typeclass constraints and built-in typeclasses
+  * Processing lists
+  * Defining functions, conditional expressions, guards
+  * Pattern matching, where declarations, let expressions
+  * Lambda expressions
   * [slides](https://scarvalhojr.github.io/tasteofhaskell/part2.html)
   * [exercises](https://scarvalhojr.github.io/tasteofhaskell/exercises2.html)
 * Part 3

@@ -8,30 +8,153 @@
 
 # Part 2 - Exercises
 
-1. What is the type of the following functions - take care to include the
-   necessary typeclass constraints when necessary:
+1. Predict the type of the following functions and confirm them in the REPL -
+   take care to include the necessary typeclass constraints when necessary:
 
-```haskell
-second xs = head (tail xs)
+   ```haskell
+   pair x y = (x, y)
 
-swap (x,y) = (y,x)
+   swap (x,y) = (y,x)
 
-pair x y = (x, y)
+   palindrome w = w == reverse w
 
-palindrome xs = reverse xs == xs
-```
+   second xs = head (tail xs)
 
-1. Write down definitions that match the declared types, replacing the
-   `undefined` values; it does not matter what the actual values are or what the
-   functions do, as long as they are type correct:
+   equal x y
+     | x == y     = True
+     | otherwise  = False
 
-```haskell
-copy :: a -> (a, a)
-copy = undefined
+   max x y = if x >= y then x else y
 
-apply :: (a -> b) -> a -> b
-apply = undefined
-```
+   take10 = take 10
+
+   filterLT x = filter (< x)
+
+   filterLT100 = filter (< 100)
+
+   applyTwo f g x = f (g x)
+   ```
+
+1. Write down functions that match the declared types, replacing the `undefined`
+   values, and taking advantage of polymorphic constraints when available;  it
+   does not matter what the functions actually do, as long as they are type
+   correct:
+
+   ```haskell
+   copy :: a -> (a, a)
+   copy = undefined
+
+   mix :: (a, b) -> (c, d) -> ((b, d), (a, c))
+   mix = undefined
+
+   apply :: (a -> b) -> a -> b
+   apply = undefined
+
+   pick :: a -> a -> Bool -> a
+   pick = undefined
+
+   noFalse :: [Bool] -> Bool
+   noFalse = undefined
+
+   select :: Eq a => a -> [a] -> [a]
+   select = undefined
+
+   munge :: (x -> y) -> (y -> (w, z)) -> x -> w
+   munge = undefined
+
+   madness :: (b -> c) -> d -> (a -> b) -> (a, e) -> (c, d)
+   madness = undefined
+
+   check :: Eq b => (a -> b) -> a -> b -> Bool
+   check = undefined
+
+   merge :: (Ord a, Num b) => (a, b) -> (b, a) -> (a, b)
+   merge = undefined
+
+   i :: a -> a
+   i = undefined
+
+   c :: a -> b -> a
+   c = undefined
+  ```
+
+1. The functions `i` and `c` defined above already exist and are included in
+   Prelude. Use Hoogle to find out their names.
+
+1. Using `map`, write a function that, given a list of names, returns the
+   corresponding initials:
+
+   ```haskell
+   initials :: [[Char]] -> [Char]
+   initials = undefined
+   ```
+
+1. The function `tail` included in the Prelude produces a list without its first
+  element. If an empty list is given, an exception occurs. Write a variation of
+  this function called `safeTail` that prevents an exception and returns an
+  empty list instead, using a conditional expression (`if then else`).
+
+   ```haskell
+   safeTail :: [a] -> [a]
+   safeTail = undefined
+   ```
+
+1. Now write one variation of `safeTail` using guards, and another using
+   pattern matching.
+
+1. Given the list of tuples `records` below, write the `choose` function using
+   `filter` and a lambda expression so that it returns the tuples that have
+   `True` and a number below 10:
+
+   ```haskell
+   records = [(True,5), (False,7), (True,12), (True,8), (False,15), (True,4)]
+
+   choose :: (Ord a, Num a) => [(Bool, a)] -> [(Bool, a)]
+   choose = undefined
+
+   -- choose records should return [(True,5),(True,8),(True,4)]
+   ```
+
+1. Given the same `records` list above, write a function `transform` using `map`
+   and a lambda expression that extracts the numbers from the tuples and doubles
+   them when they are associated with a `False` value:
+
+   ```haskell
+   transform :: Num a => [(Bool, a)] -> [a]
+   transform = undefined
+
+   -- transform records should return [5,14,12,8,30,4]
+   ```
+
+1. The Luhn algorithm is a simple checksum formula used to validate bank card
+   numbers, and can be described as follows:
+   * consider each digit as a separate number;
+   * moving from right to left, double every other number from second last;
+   * subtract 9 from each number that becomes greater than 9;
+   * add all resulting numbers together;
+   * if the total is divisible by 10, the number is consider valid.
+
+   First define a function `luhnDouble` that doubles a digit and subtract 9 if
+   the result is greater than 9:
+
+   ```haskell
+   luhnDouble :: Int -> Int
+   luhnDouble = undefined
+
+   -- luhnDouble 3 should return 6, and luhnDouble 6 should return 3
+   ```
+
+1. Using `luhnDouble`, write the `luhn` function implementing the algorithm
+   deacribed above for the case of 4 digits. To increase readability, use a
+   `where` declarations to compute intermediate results.
+
+   ```haskell
+   luhn :: Int -> Int -> Int -> Int -> Bool
+   luhn = undefined
+
+   -- luhn 1 7 8 4 should return True, and luhn 4 7 8 3 should return False
+   ```
+
 
     </xmp>
     <script src="v/0.2/strapdown.js"></script>
