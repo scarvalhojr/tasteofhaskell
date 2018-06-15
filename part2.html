@@ -176,14 +176,19 @@ class Show a where
   show :: a -> String
   showList :: [a] -> ShowS
   {-# MINIMAL showsPrec | show #-} -- Defined in ‘GHC.Show’
-instance Show a => Show [a] -- Defined in ‘GHC.Show’
-instance Show Word -- Defined in ‘GHC.Show’
 instance Show Integer -- Defined in ‘GHC.Show’
 instance Show Int -- Defined in ‘GHC.Show’
 instance Show Char -- Defined in ‘GHC.Show’
-instance Show Bool -- Defined in ‘GHC.Show’
 ...
           </code></pre>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>show 1</strong>
+"1"
+Prelude> <strong>[1..10]</strong>
+[1,2,3,4,5,6,7,8,9,10]
+Prelude> <strong class="redtext">odd</strong>
+No instance for (Show (Integer -> Bool))
+            </code></pre>
         </section>
 
         <section>
@@ -257,9 +262,6 @@ Prelude| <strong>add x = (+) x</strong>
 Prelude| <strong>:}</strong>
 Prelude> <strong>:t add</strong>
 add :: Num a => a -> a -> a
-Prelude> <strong>addOne = add 1</strong>
-Prelude> <strong>addOne 5</strong>
-6
           </code></pre>
         </section>
 
@@ -450,8 +452,8 @@ qsort (x:xs) = qsort smaller ++ [x] ++ qsort larger
 
 dist (x1,y1) (x2,y2) = sqrt (dx + dy)
   where
-  dx = (x1 - x2) ^ 2
-  dy = (y1 - y2) ^ 2
+    dx = (x1 - x2) ^ 2
+    dy = (y1 - y2) ^ 2
           </code></pre>
           <p><strong>Do not use tabs</strong> - the compiler will complain!</p>
         </section>

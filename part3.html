@@ -36,17 +36,153 @@
         </section>
 
         <section>
-          <h2>New slide</h2>
+          <h2>Imports</h2>
+          <p></p>
+          <pre><code class="haskell" data-trim data-noescape>
+-- Import all functions from Data.List, including intersperse:
+import Data.List
+-- Import isAlpha only:
+import Data.Char (isAlpha)
+-- Qualified import:
+import qualified Data.Char as C (isUpper)
+
+spaced   = intersperse ' ' "Haskell"
+original = filter isAlpha spaced
+initial  = filter C.isUpper spaced
+{-
+spaced   becomes "H a s k e l l"
+original becomes "Haskell"
+initial  becomes "H"
+-}
+          </code></pre>
+          <p>Notice single and multi-line comments!</p>
         </section>
 
         <section>
-          <h2>Where to Go from Here?</h2>
-          <ul>
-            <li><a href="http://haskellbook.com" target="_blank">Haskell Programming From First Principles</a></li>
-            <li><a href="http://www.cs.nott.ac.uk/~pszgmh/pih.html" target="_blank">Programming in Haskell, Second Edition</a></li>
-            <li><a href="https://github.com/data61/fp-course" target="_blank">Data61 Functional Programming Course</a> (free)</li>
-            <li>Many more in <a href="https://www.haskell.org/documentation" target="_blank">haskell.org</a>...</li>
-          </ul>
+          <h2>Avoiding Parenthesis</h2>
+          <p>The <strong><code>$</code></strong> operator is a convenience</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+<strong>f $ a = f a</strong>
+          </code></pre>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>negate (2 + 5)</strong>
+-7
+Prelude> <strong>negate 2 + 5</strong>
+3
+Prelude> <strong>negate $ 2 + 5</strong>
+-7
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Function Composition</h2>
+          <p>The dot operator (<strong><code>.</code></strong>) composes two functions</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+<strong>(.) :: (b -> c) -> (a -> b) -> (a -> c)</strong>
+<strong>f . g = \x -> f (g x)</strong>
+          </code></pre>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>:t even</strong>
+even :: Integral a => a -> Bool
+Prelude> <strong>:t not</strong>
+not :: Bool -> Bool
+Prelude> <strong>odd x = not (even x)</strong>
+Prelude> <strong>odd' = not . even</strong>
+Prelude> <strong>:t odd'</strong>
+odd' :: Integral a => a -> Bool
+Prelude> <strong>odd' 5</strong>
+True
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Function Composition</h2>
+          <p>Composition is associative</p>
+          <pre><code class="haskell" data-trim data-noescape>
+f . (g . h) = (f . g) . h
+          </code></pre>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>sumSqrEven ns = sum (map (^2) (filter even ns))</strong>
+Prelude> <strong>sumSqrEven [1..10]</strong>
+220
+Prelude> <strong>sumSqrEven' = sum . map (^2) . filter even</strong>
+Prelude> <strong>sumSqrEven' [1..10]</strong>
+220
+          </code></pre>
+          <p>The latter is in <strong>pointfree</strong> style</p>
+        </section>
+
+        <section>
+          <h2>List Comprehension</h2>
+          <p>Construct new lists from existing lists</p>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>[x ^ 2 | x <- [1..5]]</strong>
+[1,4,9,16,25]
+
+Prelude> <strong>[(x,y) | x <- [1,2,3], y <- "ab"]</strong>
+[(1,'a'),(1,'b'),(2,'a'),(2,'b'),(3,'a'),(3,'b')]
+Prelude> <strong>[(x,y) | y <- "ab", x <- [1,2,3]]</strong>
+[(1,'a'),(2,'a'),(3,'a'),(1,'b'),(2,'b'),(3,'b')]
+
+Prelude> <strong>[(x,y) | x <- [1,2,3], y <- [x..4]]</strong>
+[(1,1),(1,2),(1,3),(1,4),(2,2),(2,3),(2,4),(3,3),(3,4)]
+
+Prelude> <strong>factors n = [x | x <- [1..n], n `mod` x == 0]</strong>
+Prelude> <strong>factors 15</strong>
+[1,3,5,15]
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Recursive Functions</h2>
+          <pre><code class="haskell" data-trim data-noescape>
+factorial :: Int -> Int
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+
+product' :: Num a => [a] -> a
+product' []     = 1
+product' (n:ns) = n * product' ns
+
+length' :: [a] -> Int
+length' []     = 0
+length' (_:xs) = 1 + length' xs
+
+(+++) :: [a] -> [a] -> [a]
+[]     +++ ys = ys
+(x:xs) +++ ys = x : (xs +++ ys)
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Recursive Functions</h2>
+          <pre><code class="haskell" data-trim data-noescape>
+insert' :: Ord a => a -> [a] -> [a]
+insert' x [] = [x]
+insert' x (y:ys)
+  | x <= y     = x : y : ys
+  | otherwise  = y : insert' x ys
+
+isort :: Ord a => [a] -> [a]
+isort []     = []
+isort (x:xs) = insert' x (isort xs)
+
+zip' :: [a] -> [b] -> [(a,b)]
+zip' []     _      = []
+zip' _      []     = []
+zip' (x:xs) (y:ys) = (x,y) : zip' xs ys
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>New Slide</h2>
+          <p><strong><code>code</code></strong></p>
+          <pre><code class="haskell" data-trim data-noescape>
+          </code></pre>
+          <pre><code class="nohighlight" data-trim data-noescape>
+Prelude> <strong>code</strong>
+          </code></pre>
+          <p>Last line</p>
         </section>
 
         <section>
