@@ -30,10 +30,11 @@ Online at [https://scarvalhojr.github.io/tasteofhaskell](https://scarvalhojr.git
   * Imports and comments
   * Parenthesis and the $ operator
   * Function composition operator, pointfree style
-  * List comprehension, recursive functions, folds
-  * Type, data and newtype declarations
+  * List comprehension, recursive functions
+  * Folds
+  * Type, data declarations
   * Recursive types
-  * Class and instance declarations, derived instances
+  * Instance declarations and derived instances
   * [slides](https://scarvalhojr.github.io/tasteofhaskell/part3.html)
   * [exercises](https://scarvalhojr.github.io/tasteofhaskell/exercises3.html)
 
