@@ -28,7 +28,7 @@ Online at [https://scarvalhojr.github.io/tasteofhaskell](https://scarvalhojr.git
   * [exercises](https://scarvalhojr.github.io/tasteofhaskell/exercises2.html)
 * Part 3
   * Imports and comments
-  * Parenthesis and the $ operator
+  * Function application and the $ operator
   * Function composition operator, pointfree style
   * List comprehension, recursive functions
   * Folds

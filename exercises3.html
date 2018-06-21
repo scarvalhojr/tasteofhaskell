@@ -8,15 +8,142 @@
 
 # Part 3 - Exercises
 
+1. Show how the list comprehension `[x ^ 2 | x <- [1..20], even x]` can be
+   re-expressed using the higher-order functions `map` and `filter`.
+
+1. Show how, in general, a list comprehension of the type `[f x | x <- xs, p x]`
+   can be expressed in a single function using `map` and `filter`. Use the
+   function composition operator (`$`) to avoid parenthesis.
+
+   ```haskell
+   process :: (a -> b) -> (a -> Bool) -> [a] -> [b]
+   process f p xs = undefined
+   ```
+
+1. Re-write the `process` function above in pointfree style using the function
+   composition operator (`.`).
+
+1. Define a recursive function `sumdown` that returns the sum of the
+   non-negative integers from a given value down to zero. For example,
+   `sumdown 3` should return 6, and `sumdown (-1)` should return 0.
+
+   ```haskell
+   sumdown :: Int -> Int
+   sumdown = undefined
+   ```
+
+1. Suppose that a two-dimensional coordinate grid of size `n x m` is given by
+   the list of all pairs of integers (x,y) such that `0 <= x <= n` and
+   `0 <= y <= m`. Using list comprehension define a function `grid` that returns
+   a coordinate grid of a given size. For example, `grid 1 2` should return
+   `[(0,0),(0,1),(0,2),(1,0),(1,1),(1,2)]`.
+
+   ```haskell
+   type Position = (Integer, Integer)
+
+   grid :: Integer -> Integer -> [Position]
+   grid n m = undefined
+   ```
+
+1. Using list comprehension and the function `grid` above, define a function
+   `square` that returns a coordinate square of size `n`, excluding the diagonal
+   positions from `(0,0)` to `(n,n)`. For example, `square 2` should return
+   `[(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)]`.
+
+   ```haskell
+   square :: Integer -> [Position]
+   square n = undefined
+   ```
+
+1. Using recursion, implement your own versions of the following list functions.
+   Use the alternative names below to avoid conflicting with the functions
+   included in Prelude.
+
+   ```haskell
+   -- replicate
+   replicate' :: Int -> a -> [a]
+   replicate' = undefined
+
+   -- elem
+   elem' :: Eq a => a -> [a] -> Bool
+   elem' = undefined
+
+   -- takeWhile
+   takeWhile' :: (a -> Bool) -> [a] -> [a]
+   takeWhile' = undefined
+
+   -- dropWhile
+   dropWhile' :: (a -> Bool) -> [a] -> [a]
+   dropWhile' = undefined
+
+   -- concat
+   concat' :: [[a]] -> [a]
+   concat' = undefined
+
+   -- indexing operator (!!)
+   (!!!) :: [a] -> Int -> a
+   (!!!) = undefined
+   ```
+
+1. Define a recursive function that merges two sorted lists to give a single
+   sorted list. For example, `merge [2,5,6] [1,3,4]` should return
+   `[1,2,3,4,5,6]`.
+
+   ```haskell
+   merge :: Ord a => [a] -> [a] -> [a]
+   merge = undefined
+   ```
+
 1. `reverse` is a function that returns the elements of a list in reverse order.
    Implement two versions of `reverse`, one using `foldr` and one using `foldl`.
 
    ```haskell
-   reverseL :: [a] -> [a]
-   reverseL = undefined
-
    reverseR :: [a] -> [a]
    reverseR = undefined
+
+   reverseL :: [a] -> [a]
+   reverseL = undefined
+   ```
+
+1. Consider a binary search tree where each node has a unique value that is
+   greater the values on its left branch, and less than the values on its right
+   branch. Such a tree could be represented with the following data declaration:
+
+   ```haskell
+   data Tree a = Leaf | Node (Tree a) a (Tree a)
+     deriving (Show, Eq, Ord)
+   ```
+
+   For example, the tree depicted below, with leafs shown as dots (`.`),
+
+                 10
+              /      \
+             5        15
+           /   \     /  \
+          2     6   *    19
+         / \   / \      /  \
+        *   * *   *   17    22
+                     / \   /  \
+                    *   * *    *`
+
+   could be represented as follows:
+
+   ```haskell
+   bst = Node (Node (Node Leaf 2 Leaf) 5 (Node Leaf 6 Leaf))
+              10
+              (Node Leaf 15 (Node (Node Leaf 17 Leaf)
+                                  19
+                                  (Node Leaf 22 Leaf)))
+   ```
+
+   Given the `Tree` data declaration above, write the function `occurs` that
+   verifies if a given value is present in a tree, taking advantage of the
+   properties of a binary search tree. When implemented correctly,
+   `filter (flip occurs bst) [1..30]` should return `[2,5,6,10,15,17,19,22]`.
+
+   ```haskell
+   occurs :: Ord a => a -> Tree a -> Bool
+   occurs = undefined
    ```
 
     </xmp>
