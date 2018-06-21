@@ -110,7 +110,7 @@
    branch. Such a tree could be represented with the following data declaration:
 
    ```haskell
-   data Tree a = Leaf | Node (Tree a) a (Tree a)
+   data BSTree a = Leaf | Node (BSTree a) a (BSTree a)
      deriving (Show, Eq, Ord)
    ```
 
@@ -136,14 +136,22 @@
                                   (Node Leaf 22 Leaf)))
    ```
 
-   Given the `Tree` data declaration above, write the function `occurs` that
+   Given the `BSTree` data declaration above, write the function `occurs` that
    verifies if a given value is present in a tree, taking advantage of the
-   properties of a binary search tree. When implemented correctly,
+   properties of a binary search trees. When implemented correctly,
    `filter (flip occurs bst) [1..30]` should return `[2,5,6,10,15,17,19,22]`.
 
    ```haskell
-   occurs :: Ord a => a -> Tree a -> Bool
+   occurs :: Ord a => a -> BSTree a -> Bool
    occurs = undefined
+   ```
+
+1. Write a function `insert` that inserts a new value into a binary search tree
+   as defined above, if the value is not yet present.
+
+   ```haskell
+   insert :: Ord a => a -> BSTree a -> BSTree a
+   insert = undefined
    ```
 
     </xmp>
